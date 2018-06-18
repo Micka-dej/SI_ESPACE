@@ -16,7 +16,6 @@ services:
             - ./logs/symfony:/var/www/symfony/var/logs:cached
         links:
             - db
-        entrypoint: "/root/create-database.sh"
         environment:
             APP_ENV: dev
             APP_SECRET: 9149b77802868945707c5ef1b4b3e1f9

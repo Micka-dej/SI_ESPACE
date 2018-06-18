@@ -21,3 +21,7 @@ done
 echo "[INFO] MYSQL STARTED"
 
 /var/www/symfony/bin/console doctrine:schema:create
+
+echo "[INFO] DOCTRINE OK"
+
+tail -f /dev/null

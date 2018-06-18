@@ -37,11 +37,11 @@ ADD symfony.ini /etc/php7/cli/conf.d/
 
 ADD symfony.pool.conf /etc/php7/php-fpm.d/
 
+COPY create-database.sh /root/
+RUN chmod +x /root/create-database.sh
+
 CMD ["php-fpm7", "-F"]
 
 WORKDIR /var/www/symfony
 
 EXPOSE 9000
-
-ADD create-database.sh /root/
-RUN chmod +x /root/create-database.sh
