@@ -1,9 +1,9 @@
-version: '2'
+version: '2.1'
 services:
     db:
-        image: mysql
+        image: mysql:5.7
         ports:
-            - "3306:3306"
+            - "3309:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: symfony
@@ -11,13 +11,19 @@ services:
             MYSQL_PASSWORD: symfony
     php:
         build: ./php-fpm
-        ports:
-            - "12002:9000"
         volumes:
             - ./symfony:/var/www/symfony:cached
             - ./logs/symfony:/var/www/symfony/var/logs:cached
         links:
             - db
+        entrypoint: "/root/create-database.sh"
+        environment:
+            APP_ENV: dev
+            APP_SECRET: 9149b77802868945707c5ef1b4b3e1f9
+            DATABASE_URL: mysql://symfony:symfony@db:3306/symfony
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_PORT: 3306
     nginx:
         build: ./nginx
         ports:

@@ -25,7 +25,8 @@ RUN apk add --update \
     php7-session \
     php7-simplexml \
     make \
-    curl
+    curl \
+    mysql-client
 
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
@@ -39,4 +40,8 @@ ADD symfony.pool.conf /etc/php7/php-fpm.d/
 CMD ["php-fpm7", "-F"]
 
 WORKDIR /var/www/symfony
+
 EXPOSE 9000
+
+ADD create-database.sh /root/
+RUN chmod +x /root/create-database.sh

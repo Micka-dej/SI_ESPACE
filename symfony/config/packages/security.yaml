@@ -1,0 +1,35 @@
+security:
+    providers:
+        api_token_user_provider:
+            id: cream_io_user.security.apitoken_user_provider
+        db_provider:
+            entity:
+                class: CreamIO\UserBundle\Entity\BUser
+                property: username
+
+    role_hierarchy:
+        IS_AWAITING_VALIDATION: IS_AUTHENTICATED_ANONYMOUSLY
+        ROLE_ADMIN:     IS_AWAITING_VALIDATION
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    access_control:
+        - { path: /api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: ROLE_ADMIN }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            pattern: ^/admin/api
+            stateless: true
+            simple_preauth:
+                authenticator: cream_io_user.security.apitoken_authenticator
+            provider: api_token_user_provider
+
+    encoders:
+        CreamIO\UserBundle\Entity\BUser:
+            algorithm: bcrypt
+            cost: 15
