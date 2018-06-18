@@ -12,8 +12,7 @@ services:
     php:
         build: ./php-fpm
         volumes:
-            - ./symfony:/var/www/symfony:cached
-            - ./logs/symfony:/var/www/symfony/var/logs:cached
+            - ./symfony:/var/www/symfony
         links:
             - db
         environment:
@@ -32,7 +31,7 @@ services:
         volumes_from:
             - php
         volumes:
-            - ./logs/nginx/:/var/log/nginx:cached
+            - ./logs/nginx/:/var/log/nginx
     elk:
         image: willdurand/elk
         ports:
