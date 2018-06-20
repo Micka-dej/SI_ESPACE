@@ -12,7 +12,9 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - docker-compose -v
   - docker -v
-  - mkdir symfony
+  - cd symfony && compose install
+  - cd ../frontend-code && yarn
+  - cd ..
 
 script:
   - docker-compose -f docker-compose.travis.yml up -d
