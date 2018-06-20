@@ -2,9 +2,6 @@
     "creamio/symfony_basebundle": {
         "version": "v0.2.5.1"
     },
-    "creamio/symfony_userbundle": {
-        "version": "v1.0.7"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

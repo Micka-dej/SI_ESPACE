@@ -5,7 +5,7 @@
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "creamio/symfony_userbundle": "^1.0",
+        "creamio/symfony_basebundle": "v0.2.5.1",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/console": "^4.1",
         "symfony/flex": "^1.0",

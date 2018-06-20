@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36987ec6ec54d1694be51f2196424b92",
+    "content-hash": "d7fa5e6dde5fa41a94d99f12edacd77c",
     "packages": [
         {
             "name": "creamio/symfony_basebundle",
@@ -73,75 +73,6 @@
             ],
             "description": "Core bundle for CreamIO bundles in symfony",
             "time": "2018-04-24T13:37:50+00:00"
-        },
-        {
-            "name": "creamio/symfony_userbundle",
-            "version": "v1.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Cream-IO/symfony_userbundle.git",
-                "reference": "7a9162cb580631b8295f41996b4c6ffbb1431a3a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Cream-IO/symfony_userbundle/zipball/7a9162cb580631b8295f41996b4c6ffbb1431a3a",
-                "reference": "7a9162cb580631b8295f41996b4c6ffbb1431a3a",
-                "shasum": ""
-            },
-            "require": {
-                "creamio/symfony_basebundle": "^0",
-                "ext-iconv": "*",
-                "gbprod/uuid-normalizer": "^1.1",
-                "php": "^7.2",
-                "ramsey/uuid-doctrine": "^1.4",
-                "sensio/framework-extra-bundle": "^5.1",
-                "symfony/console": "^4.0",
-                "symfony/flex": "^1.0",
-                "symfony/framework-bundle": "^4.0",
-                "symfony/orm-pack": "^1.0",
-                "symfony/security-bundle": "^4.0",
-                "symfony/validator": "^4.0"
-            },
-            "require-dev": {
-                "behat/behat": "^3.4",
-                "behat/mink": "^1.7.1@dev",
-                "behat/mink-browserkit-driver": "@dev",
-                "behat/mink-extension": "^2.3",
-                "behat/symfony2-extension": "^2.1",
-                "behatch/contexts": "^3.1",
-                "doctrine/doctrine-fixtures-bundle": "^3.0",
-                "emuse/behat-html-formatter": "^0.1.0",
-                "friendsofphp/php-cs-fixer": "^2.11",
-                "phpunit/php-code-coverage": "^6.0",
-                "rdx/behat-variables": "^1.2",
-                "symfony/browser-kit": "~4.0",
-                "symfony/dom-crawler": "~4.0",
-                "symfony/dotenv": "^4.0",
-                "symfony/maker-bundle": "^1.4",
-                "symfony/phpunit-bridge": "^4.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "CreamIO\\UserBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "CC-BY-NC-SA-4.0"
-            ],
-            "authors": [
-                {
-                    "name": "QRaimbault"
-                }
-            ],
-            "description": "Simple API to manager users for CreamIO projects in symfony",
-            "time": "2018-04-24T13:19:20+00:00"
         },
         {
             "name": "doctrine/annotations",
