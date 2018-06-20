@@ -1,4 +1,6 @@
 {
+    "name": "hetic_si_space",
+    "description": "",
     "type": "project",
     "license": "proprietary",
     "require": {

@@ -1,6 +1,13 @@
 # Project Week - SPACE
 
-We use Docker as a development environment.
+## Requirements
+
+- Docker
+- Docker Composer
+- Docker Machine
+- Port 12000-12003 availables
+- A brain
+- Some Kibana knowledge for debugging/monitoring
 
 ## Docker
 
@@ -10,6 +17,12 @@ First, clone this repository:
 
 ```bash
 git clone git@github.com:QRaimbault/SI_ESPACE.git
+```
+
+Move into the symfony directory (cd SI_ESPACE/symfony) then run:
+
+```bash
+composer install
 ```
 
 Then, run:
