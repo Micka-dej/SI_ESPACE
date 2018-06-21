@@ -1,4 +1,10 @@
 {
+    "composer/semver": {
+        "version": "1.4.2"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.1.0"
+    },
     "creamio/symfony_basebundle": {
         "version": "v0.2.5.1"
     },
@@ -80,6 +86,15 @@
             "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
         }
     },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "81dee417d2cc60cd1c9d6208dff2ec22a1103e93"
+        }
+    },
     "gbprod/uuid-normalizer": {
         "version": "v1.1.0"
     },
@@ -100,6 +115,9 @@
     },
     "paragonie/random_compat": {
         "version": "v2.0.15"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -233,6 +251,9 @@
             "ref": "371d1a2b69984710646b09a1182ef1d4308c904f"
         }
     },
+    "symfony/options-resolver": {
+        "version": "v4.1.0"
+    },
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
@@ -241,6 +262,9 @@
     },
     "symfony/polyfill-php72": {
         "version": "v1.8.0"
+    },
+    "symfony/process": {
+        "version": "v4.1.0"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.3"

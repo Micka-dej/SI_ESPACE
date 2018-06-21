@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +22,7 @@ class Parking
     private $id;
 
     /**
-     * Parking matricule (unique identifier)
+     * Parking matricule (unique identifier).
      *
      * @ORM\Column(type="string", length=30)
      *
@@ -29,7 +31,7 @@ class Parking
     private $matricule;
 
     /**
-     * Maximal allowed spaceship size
+     * Maximal allowed spaceship size.
      *
      * @ORM\Column(type="string", length=30)
      *
@@ -38,7 +40,7 @@ class Parking
     private $allowedSize;
 
     /**
-     * Total number of slots
+     * Total number of slots.
      *
      * @ORM\Column(type="integer")
      *
@@ -47,7 +49,7 @@ class Parking
     private $slots;
 
     /**
-     * ID getter
+     * ID getter.
      *
      * @return int
      */
@@ -57,7 +59,7 @@ class Parking
     }
 
     /**
-     * Matricule getter
+     * Matricule getter.
      *
      * @return null|string
      */
@@ -67,7 +69,7 @@ class Parking
     }
 
     /**
-     * Matricule setter
+     * Matricule setter.
      *
      * @param string $matricule
      *
@@ -81,7 +83,7 @@ class Parking
     }
 
     /**
-     * AllowedSize getter
+     * AllowedSize getter.
      *
      * @return null|string
      */
@@ -91,7 +93,7 @@ class Parking
     }
 
     /**
-     * AllowedSize setter
+     * AllowedSize setter.
      *
      * @param string $allowedSize
      *
@@ -105,7 +107,7 @@ class Parking
     }
 
     /**
-     * Slots getter
+     * Slots getter.
      *
      * @return int|null
      */
@@ -115,7 +117,7 @@ class Parking
     }
 
     /**
-     * Slots setter
+     * Slots setter.
      *
      * @param int $slots
      *
