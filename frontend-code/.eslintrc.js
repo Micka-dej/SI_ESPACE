@@ -12,7 +12,7 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "single"],
     semi: ["error", "always"],
-    "no-console": ["warn", { allow: ["warn", "error"] }],
+    "no-console": ["warn", { allow: ["warn", "log", "error"] }],
     "valid-jsdoc": "warn",
     yoda: ["warn", "never", { "onlyEquality": true }],
   }
