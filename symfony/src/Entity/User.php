@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -26,6 +27,9 @@ class User
      * @ORM\Column(type="string", length=50)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="50", maxMessage="User's last name must not exceed {{ limit }} characters.")
      */
     private $lastName;
 
@@ -35,6 +39,9 @@ class User
      * @ORM\Column(type="string", length=50)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="50", maxMessage="User's first name must not exceed {{ limit }} characters.")
      */
     private $firstName;
 
@@ -44,6 +51,12 @@ class User
      * @ORM\Column(type="string", length=30)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -53,6 +66,9 @@ class User
      * @ORM\Column(type="string", length=20)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="20", maxMessage="User's planet must not exceed {{ limit }} characters.")
      */
     private $planet;
 
@@ -62,6 +78,9 @@ class User
      * @ORM\Column(type="string", length=30)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="30", maxMessage="User's username must not exceed {{ limit }} characters.")
      */
     private $username;
 
@@ -71,6 +90,9 @@ class User
      * @ORM\Column(type="string", length=20)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="20", maxMessage="User's phone number must not exceed {{ limit }} characters.")
      */
     private $phoneNumber;
 
@@ -80,6 +102,9 @@ class User
      * @ORM\Column(type="string", length=60)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="60", maxMessage="User's password must not exceed {{ limit }} characters.")
      */
     private $password;
 
@@ -89,6 +114,11 @@ class User
      * @ORM\Column(type="integer")
      *
      * @var integer
+     *
+     * @Assert\NotBlank()
+     * @Assert\GreaterThanOrEqual(
+     *     value = 0
+     * )
      */
     private $credits;
 

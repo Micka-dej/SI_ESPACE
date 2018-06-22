@@ -9,6 +9,7 @@ use DateTimeInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @ORM\Table(name="space_order")
  */
 class Order
 {

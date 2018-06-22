@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpaceShipRepository")
@@ -21,11 +22,14 @@ class SpaceShip
     private $id;
 
     /**
-     * SpaceShip matricule (unique identifier).
+     * Spaceship matricule (unique identifier).
      *
      * @ORM\Column(type="string", length=30)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="30", maxMessage="Spaceship matricule must not exceed {{ limit }} characters.")
      */
     private $matricule;
 
@@ -35,6 +39,9 @@ class SpaceShip
      * @ORM\Column(type="string", length=20)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="20", maxMessage="Top of fuel must not exceed {{ limit }} characters.")
      */
     private $fuelType;
 
@@ -44,6 +51,9 @@ class SpaceShip
      * @ORM\Column(type="string", length=30)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="30", maxMessage="Spaceship size must not exceed {{ limit }} characters.")
      */
     private $size;
 

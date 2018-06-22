@@ -119,6 +119,15 @@
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "1.0.1"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "0.4.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -209,6 +218,9 @@
             "ref": "e921bdbfe20cdefa3b82f379d1cd36df1bc8d115"
         }
     },
+    "symfony/form": {
+        "version": "v4.1.0"
+    },
     "symfony/framework-bundle": {
         "version": "3.3",
         "recipe": {
@@ -225,6 +237,9 @@
         "version": "v4.1.0"
     },
     "symfony/inflector": {
+        "version": "v4.1.0"
+    },
+    "symfony/intl": {
         "version": "v4.1.0"
     },
     "symfony/lts": {
@@ -257,6 +272,9 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.8.0"
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.8.0"
     },
@@ -270,6 +288,9 @@
         "version": "v1.0.3"
     },
     "symfony/property-access": {
+        "version": "v4.1.0"
+    },
+    "symfony/property-info": {
         "version": "v4.1.0"
     },
     "symfony/routing": {
@@ -295,6 +316,9 @@
     },
     "symfony/serializer": {
         "version": "v4.1.0"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.1"
     },
     "symfony/stopwatch": {
         "version": "v4.1.0"
@@ -340,6 +364,9 @@
     },
     "twig/twig": {
         "version": "v2.4.8"
+    },
+    "webmozart/assert": {
+        "version": "1.3.0"
     },
     "zendframework/zend-code": {
         "version": "3.3.0"
