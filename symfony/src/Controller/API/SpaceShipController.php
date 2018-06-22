@@ -4,17 +4,17 @@ namespace App\Controller\API;
 
 use App\Entity\SpaceShip;
 use CreamIO\BaseBundle\Service\APIService;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * Class SpaceShipController
+ * Class SpaceShipController.
  *
  * @Route("/api", name="api_")
  */
@@ -39,8 +39,7 @@ class SpaceShipController extends Controller
      */
     public function show(SpaceShip $spaceship, Request $request, APIService $APIService): JsonResponse
     {
-
-        return $APIService->successWithResults($spaceship, 200, '',$request);
+        return $APIService->successWithResults($spaceship, 200, '', $request);
     }
 
     /**
@@ -48,13 +47,12 @@ class SpaceShipController extends Controller
      */
     public function delete(SpaceShip $spaceship, Request $request, APIService $APIService): JsonResponse
     {
-
         $em = $this->getDoctrine()->getManager();
         $spaceshipID = $spaceship->getId();
         $em->remove($spaceship);
         $em->flush();
 
-        return $APIService->successWithoutResultsRedirected($spaceshipID, $request, Response::HTTP_OK, "/api/spaceship");
+        return $APIService->successWithoutResultsRedirected($spaceshipID, $request, Response::HTTP_OK, '/api/spaceship');
     }
 
     /**
@@ -62,8 +60,8 @@ class SpaceShipController extends Controller
      */
     public function add(Request $request, APIService $APIService): JsonResponse
     {
-        if ($request->getContentType() !== self::ACCEPTED_CONTENT_TYPE) {
-            throw $APIService->error(Response::HTTP_BAD_REQUEST,'Bad content type. Use application/json instead.'.$request->getContentType());
+        if (self::ACCEPTED_CONTENT_TYPE !== $request->getContentType()) {
+            throw $APIService->error(Response::HTTP_BAD_REQUEST, 'Bad content type. Use application/json instead.'.$request->getContentType());
         }
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
@@ -77,6 +75,5 @@ class SpaceShipController extends Controller
         $em->flush();
 
         return $APIService->successWithResults($spaceship, 200, $spaceship->getId(), $request);
-
     }
 }

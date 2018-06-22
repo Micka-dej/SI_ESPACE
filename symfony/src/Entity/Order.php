@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
@@ -23,7 +23,7 @@ class Order
     private $id;
 
     /**
-     * Starting date of the stay
+     * Starting date of the stay.
      *
      * @ORM\Column(type="datetime")
      *
@@ -32,7 +32,7 @@ class Order
     private $startingDate;
 
     /**
-     * Ending date of the stay
+     * Ending date of the stay.
      *
      * @ORM\Column(type="datetime")
      *
@@ -41,7 +41,7 @@ class Order
     private $endingDate;
 
     /**
-     * Additional services ordered
+     * Additional services ordered.
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\AdditionalService", inversedBy="orders")
      */
@@ -68,7 +68,7 @@ class Order
     }
 
     /**
-     * ID getter
+     * ID getter.
      *
      * @return int|null
      */
@@ -78,7 +78,7 @@ class Order
     }
 
     /**
-     * Spaceship getter
+     * Spaceship getter.
      *
      * @return SpaceShip|null
      */
@@ -88,7 +88,7 @@ class Order
     }
 
     /**
-     * Spaceship setter
+     * Spaceship setter.
      *
      * @param SpaceShip|null $spaceship
      *
@@ -102,7 +102,7 @@ class Order
     }
 
     /**
-     * StartingDate getter
+     * StartingDate getter.
      *
      * @return \DateTimeInterface|null
      */
@@ -112,7 +112,7 @@ class Order
     }
 
     /**
-     * StartingDate setter
+     * StartingDate setter.
      *
      * @param \DateTimeInterface $startingDate
      *
@@ -126,7 +126,7 @@ class Order
     }
 
     /**
-     * EndingDate getter
+     * EndingDate getter.
      *
      * @return \DateTimeInterface|null
      */
@@ -136,7 +136,7 @@ class Order
     }
 
     /**
-     * EndingDate setter
+     * EndingDate setter.
      *
      * @param \DateTimeInterface $endingDate
      *
@@ -158,7 +158,7 @@ class Order
     }
 
     /**
-     * AdditionalService add
+     * AdditionalService add.
      *
      * @param AdditionalService $additionalService
      *
@@ -174,7 +174,7 @@ class Order
     }
 
     /**
-     * AdditionalSerice remove
+     * AdditionalSerice remove.
      *
      * @param AdditionalService $additionalService
      *

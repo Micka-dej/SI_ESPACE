@@ -22,7 +22,7 @@ class AdditionalService
     private $id;
 
     /**
-     * Name of the service
+     * Name of the service.
      *
      * @ORM\Column(type="string", length=30)
      *
@@ -31,7 +31,7 @@ class AdditionalService
     private $name;
 
     /**
-     * Description of the service
+     * Description of the service.
      *
      * @ORM\Column(type="text")
      *
@@ -40,7 +40,7 @@ class AdditionalService
     private $description;
 
     /**
-     * Price of the service
+     * Price of the service.
      *
      * @ORM\Column(type="integer")
      *
@@ -59,7 +59,7 @@ class AdditionalService
     }
 
     /**
-     * ID getter
+     * ID getter.
      *
      * @return int|null
      */
@@ -69,7 +69,7 @@ class AdditionalService
     }
 
     /**
-     * Name getter
+     * Name getter.
      *
      * @return null|string
      */
@@ -79,7 +79,7 @@ class AdditionalService
     }
 
     /**
-     * Name setter
+     * Name setter.
      *
      * @param string $name
      *
@@ -93,7 +93,7 @@ class AdditionalService
     }
 
     /**
-     * Description getter
+     * Description getter.
      *
      * @return null|string
      */
@@ -103,7 +103,7 @@ class AdditionalService
     }
 
     /**
-     * Description setter
+     * Description setter.
      *
      * @param string $description
      *
@@ -117,7 +117,7 @@ class AdditionalService
     }
 
     /**
-     * Price getter
+     * Price getter.
      *
      * @return int|null
      */
@@ -127,7 +127,7 @@ class AdditionalService
     }
 
     /**
-     * Price setter
+     * Price setter.
      *
      * @param int $price
      *

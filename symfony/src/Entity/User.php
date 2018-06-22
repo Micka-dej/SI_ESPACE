@@ -22,7 +22,7 @@ class User
     private $id;
 
     /**
-     * User's last name
+     * User's last name.
      *
      * @ORM\Column(type="string", length=50)
      *
@@ -34,7 +34,7 @@ class User
     private $lastName;
 
     /**
-     * User's first name
+     * User's first name.
      *
      * @ORM\Column(type="string", length=50)
      *
@@ -46,7 +46,7 @@ class User
     private $firstName;
 
     /**
-     * User's email address
+     * User's email address.
      *
      * @ORM\Column(type="string", length=30)
      *
@@ -61,7 +61,7 @@ class User
     private $email;
 
     /**
-     * The planet whose the user comes from
+     * The planet whose the user comes from.
      *
      * @ORM\Column(type="string", length=20)
      *
@@ -73,7 +73,7 @@ class User
     private $planet;
 
     /**
-     * User's username
+     * User's username.
      *
      * @ORM\Column(type="string", length=30)
      *
@@ -85,7 +85,7 @@ class User
     private $username;
 
     /**
-     * User's phone number
+     * User's phone number.
      *
      * @ORM\Column(type="string", length=20)
      *
@@ -97,7 +97,7 @@ class User
     private $phoneNumber;
 
     /**
-     * User's password
+     * User's password.
      *
      * @ORM\Column(type="string", length=60)
      *
@@ -109,11 +109,11 @@ class User
     private $password;
 
     /**
-     * User's credits
+     * User's credits.
      *
      * @ORM\Column(type="integer")
      *
-     * @var integer
+     * @var int
      *
      * @Assert\NotBlank()
      * @Assert\GreaterThanOrEqual(
@@ -123,7 +123,7 @@ class User
     private $credits;
 
     /**
-     * User's bills
+     * User's bills.
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user")
      */
@@ -135,7 +135,7 @@ class User
     }
 
     /**
-     * ID getter
+     * ID getter.
      *
      * @return int
      */
@@ -145,7 +145,7 @@ class User
     }
 
     /**
-     * LastName getter
+     * LastName getter.
      *
      * @return null|string
      */
@@ -155,7 +155,7 @@ class User
     }
 
     /**
-     * LastName setter
+     * LastName setter.
      *
      * @param string $lastName
      *
@@ -169,7 +169,7 @@ class User
     }
 
     /**
-     * FirstName getter
+     * FirstName getter.
      *
      * @return null|string
      */
@@ -179,7 +179,7 @@ class User
     }
 
     /**
-     * FirstName setter
+     * FirstName setter.
      *
      * @param string $firstName
      *
@@ -193,7 +193,7 @@ class User
     }
 
     /**
-     * Email getter
+     * Email getter.
      *
      * @return null|string
      */
@@ -203,7 +203,7 @@ class User
     }
 
     /**
-     * Email setter
+     * Email setter.
      *
      * @param string $email
      *
@@ -217,7 +217,7 @@ class User
     }
 
     /**
-     * Planet getter
+     * Planet getter.
      *
      * @return null|string
      */
@@ -227,7 +227,7 @@ class User
     }
 
     /**
-     * planet setter
+     * planet setter.
      *
      * @param string $planet
      *
@@ -241,7 +241,7 @@ class User
     }
 
     /**
-     * Username getter
+     * Username getter.
      *
      * @return null|string
      */
@@ -251,7 +251,7 @@ class User
     }
 
     /**
-     * Username setter
+     * Username setter.
      *
      * @param string $username
      *
@@ -265,7 +265,7 @@ class User
     }
 
     /**
-     * Phone Number getter
+     * Phone Number getter.
      *
      * @return string|null
      */
@@ -275,7 +275,7 @@ class User
     }
 
     /**
-     * Phone Number setter
+     * Phone Number setter.
      *
      * @param string $phoneNumber
      *
@@ -289,7 +289,7 @@ class User
     }
 
     /**
-     * Password getter
+     * Password getter.
      *
      * @return null|string
      */
@@ -299,7 +299,7 @@ class User
     }
 
     /**
-     * Password setter
+     * Password setter.
      *
      * @param string $password
      *
@@ -313,7 +313,7 @@ class User
     }
 
     /**
-     * Credits getter
+     * Credits getter.
      *
      * @return int|null
      */
@@ -323,7 +323,7 @@ class User
     }
 
     /**
-     * Credits setter
+     * Credits setter.
      *
      * @param int $credits
      *
