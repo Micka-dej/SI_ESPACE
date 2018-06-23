@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -48,14 +49,13 @@ class User
     /**
      * User's email address.
      *
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, unique=true)
      *
      * @var string
      *
      * @Assert\NotBlank()
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
+     *     message = "The email '{{ value }}' is not a valid email."
      * )
      */
     private $email;
@@ -75,7 +75,7 @@ class User
     /**
      * User's username.
      *
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, unique=true)
      *
      * @var string
      *
@@ -87,7 +87,7 @@ class User
     /**
      * User's phone number.
      *
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, unique=true)
      *
      * @var string
      *
@@ -99,12 +99,9 @@ class User
     /**
      * User's password.
      *
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=64)
      *
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="60", maxMessage="User's password must not exceed {{ limit }} characters.")
      */
     private $password;
 
@@ -129,9 +126,15 @@ class User
      */
     private $ordersBill;
 
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
     public function __construct()
     {
         $this->ordersBill = new ArrayCollection();
+        $this->isActive = true;
     }
 
     /**
@@ -366,4 +369,47 @@ class User
 
         return $this;
     }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            ) = unserialize($serialized);
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_ADMIN'];
+    }
+
+    /**
+     * No need to salt with bcrypt, already handled by the encoder
+     *
+     * @see http://php.net/manual/fr/function.password-hash.php
+     * @see https://fr.wikipedia.org/wiki/Salage_(cryptographie)
+     *
+     * @return null|string
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+
 }
