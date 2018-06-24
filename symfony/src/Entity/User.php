@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -21,91 +23,122 @@ class User
     private $id;
 
     /**
-     * User's last name
+     * User's last name.
      *
      * @ORM\Column(type="string", length=50)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="50", maxMessage="User's last name must not exceed {{ limit }} characters.")
      */
     private $lastName;
 
     /**
-     * User's first name
+     * User's first name.
      *
      * @ORM\Column(type="string", length=50)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="50", maxMessage="User's first name must not exceed {{ limit }} characters.")
      */
     private $firstName;
 
     /**
-     * User's email address
+     * User's email address.
      *
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, unique=true)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
-     * The planet whose the user comes from
+     * The planet whose the user comes from.
      *
      * @ORM\Column(type="string", length=20)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="20", maxMessage="User's planet must not exceed {{ limit }} characters.")
      */
     private $planet;
 
     /**
-     * User's username
+     * User's username.
      *
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, unique=true)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="30", maxMessage="User's username must not exceed {{ limit }} characters.")
      */
     private $username;
 
     /**
-     * User's phone number
+     * User's phone number.
      *
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, unique=true)
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="20", maxMessage="User's phone number must not exceed {{ limit }} characters.")
      */
     private $phoneNumber;
 
     /**
-     * User's password
+     * User's password.
      *
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=64)
      *
      * @var string
      */
     private $password;
 
     /**
-     * User's credits
+     * User's credits.
      *
      * @ORM\Column(type="integer")
      *
-     * @var integer
+     * @var int
+     *
+     * @Assert\NotBlank()
+     * @Assert\GreaterThanOrEqual(
+     *     value = 0
+     * )
      */
     private $credits;
 
     /**
-     * User's bills
+     * User's bills.
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user")
      */
     private $ordersBill;
 
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
     public function __construct()
     {
         $this->ordersBill = new ArrayCollection();
+        $this->isActive = true;
     }
 
     /**
-     * ID getter
+     * ID getter.
      *
      * @return int
      */
@@ -115,7 +148,7 @@ class User
     }
 
     /**
-     * LastName getter
+     * LastName getter.
      *
      * @return null|string
      */
@@ -125,7 +158,7 @@ class User
     }
 
     /**
-     * LastName setter
+     * LastName setter.
      *
      * @param string $lastName
      *
@@ -139,7 +172,7 @@ class User
     }
 
     /**
-     * FirstName getter
+     * FirstName getter.
      *
      * @return null|string
      */
@@ -149,7 +182,7 @@ class User
     }
 
     /**
-     * FirstName setter
+     * FirstName setter.
      *
      * @param string $firstName
      *
@@ -163,7 +196,7 @@ class User
     }
 
     /**
-     * Email getter
+     * Email getter.
      *
      * @return null|string
      */
@@ -173,7 +206,7 @@ class User
     }
 
     /**
-     * Email setter
+     * Email setter.
      *
      * @param string $email
      *
@@ -187,7 +220,7 @@ class User
     }
 
     /**
-     * Planet getter
+     * Planet getter.
      *
      * @return null|string
      */
@@ -197,7 +230,7 @@ class User
     }
 
     /**
-     * planet setter
+     * planet setter.
      *
      * @param string $planet
      *
@@ -211,7 +244,7 @@ class User
     }
 
     /**
-     * Username getter
+     * Username getter.
      *
      * @return null|string
      */
@@ -221,7 +254,7 @@ class User
     }
 
     /**
-     * Username setter
+     * Username setter.
      *
      * @param string $username
      *
@@ -235,7 +268,7 @@ class User
     }
 
     /**
-     * Phone Number getter
+     * Phone Number getter.
      *
      * @return string|null
      */
@@ -245,7 +278,7 @@ class User
     }
 
     /**
-     * Phone Number setter
+     * Phone Number setter.
      *
      * @param string $phoneNumber
      *
@@ -259,7 +292,7 @@ class User
     }
 
     /**
-     * Password getter
+     * Password getter.
      *
      * @return null|string
      */
@@ -269,7 +302,7 @@ class User
     }
 
     /**
-     * Password setter
+     * Password setter.
      *
      * @param string $password
      *
@@ -283,7 +316,7 @@ class User
     }
 
     /**
-     * Credits getter
+     * Credits getter.
      *
      * @return int|null
      */
@@ -293,7 +326,7 @@ class User
     }
 
     /**
-     * Credits setter
+     * Credits setter.
      *
      * @param int $credits
      *
@@ -336,4 +369,47 @@ class User
 
         return $this;
     }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            ) = unserialize($serialized);
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_ADMIN'];
+    }
+
+    /**
+     * No need to salt with bcrypt, already handled by the encoder
+     *
+     * @see http://php.net/manual/fr/function.password-hash.php
+     * @see https://fr.wikipedia.org/wiki/Salage_(cryptographie)
+     *
+     * @return null|string
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+
 }
