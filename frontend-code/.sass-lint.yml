@@ -1,5 +1,5 @@
 options:
-  formatter: stylish
+  formatter: prettier
 files:
   include: '**/*.s+(a|c)ss'
 rules:

@@ -1,0 +1,12 @@
+{
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@Component/*": ["src/components/*"],
+      "@View/*": ["src/views/*"],
+      "@ViewStyle/*": ["src/scss/views/*"],
+      "@ComponentStyle/*": ["src/scss/components/*"]
+    }
+  }
+}

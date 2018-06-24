@@ -5,11 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("email")
+ * @UniqueEntity("username")
+ * @UniqueEntity("phoneNumber")
  */
 class User implements UserInterface, \Serializable
 {
@@ -18,7 +22,7 @@ class User implements UserInterface, \Serializable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      *
-     * @var int
+     * @var null|int
      */
     private $id;
 
@@ -27,7 +31,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=50)
      *
-     * @var string
+     * @var null|string
      *
      * @Assert\NotBlank()
      * @Assert\Length(max="50", maxMessage="User's last name must not exceed {{ limit }} characters.")
@@ -39,7 +43,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=50)
      *
-     * @var string
+     * @var null|string
      *
      * @Assert\NotBlank()
      * @Assert\Length(max="50", maxMessage="User's first name must not exceed {{ limit }} characters.")
@@ -51,7 +55,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=30, unique=true)
      *
-     * @var string
+     * @var null|string
      *
      * @Assert\NotBlank()
      * @Assert\Email(
@@ -65,7 +69,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=20)
      *
-     * @var string
+     * @var null|string
      *
      * @Assert\NotBlank()
      * @Assert\Length(max="20", maxMessage="User's planet must not exceed {{ limit }} characters.")
@@ -77,7 +81,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=30, unique=true)
      *
-     * @var string
+     * @var null|string
      *
      * @Assert\NotBlank()
      * @Assert\Length(max="30", maxMessage="User's username must not exceed {{ limit }} characters.")
@@ -89,7 +93,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=20, unique=true)
      *
-     * @var string
+     * @var null|string
      *
      * @Assert\NotBlank()
      * @Assert\Length(max="20", maxMessage="User's phone number must not exceed {{ limit }} characters.")
@@ -101,7 +105,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=64)
      *
-     * @var string
+     * @var null|string
      */
     private $password;
 
@@ -110,7 +114,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="integer")
      *
-     * @var int
+     * @var null|int
      *
      * @Assert\NotBlank()
      * @Assert\GreaterThanOrEqual(
@@ -123,18 +127,45 @@ class User implements UserInterface, \Serializable
      * User's bills.
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user")
+     *
+     * @var Order[]
      */
     private $ordersBill;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
+     *
+     * @var null|bool
      */
     private $isActive;
 
+    /**
+     * User creation time.
+     *
+     * @var \DateTime
+     *
+     * @ORM\Column(name="creation_time", type="datetime")
+     */
+    private $creationTime;
+
+    /**
+     * User's plain password (not stored in database, only used at registration).
+     *
+     * @var null|string
+     *
+     * @Assert\NotBlank(message="Password can't be blank")
+     * @Assert\Length(min="5", max="4096", minMessage="Password's lenght must be at least {{ limit }} characters", maxMessage="Password's lenght can't be above {{ limit }} characters")
+     */
+    private $plainPassword;
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->ordersBill = new ArrayCollection();
         $this->isActive = true;
+        $this->creationTime = new \DateTime();
     }
 
     /**
@@ -347,6 +378,11 @@ class User implements UserInterface, \Serializable
         return $this->ordersBill;
     }
 
+    /**
+     * @param Order $ordersBill
+     *
+     * @return User
+     */
     public function addOrdersBill(Order $ordersBill): self
     {
         if (!$this->ordersBill->contains($ordersBill)) {
@@ -357,6 +393,11 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param Order $ordersBill
+     *
+     * @return User
+     */
     public function removeOrdersBill(Order $ordersBill): self
     {
         if ($this->ordersBill->contains($ordersBill)) {
@@ -370,6 +411,9 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function serialize()
     {
         return serialize([
@@ -379,37 +423,100 @@ class User implements UserInterface, \Serializable
         ]);
     }
 
+    /**
+     * @param string $serialized
+     */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->username,
-            $this->password,
-            ) = unserialize($serialized);
+            $this->password) = unserialize($serialized);
     }
 
+    /**
+     * @return array
+     */
     public function getRoles(): array
     {
         return ['ROLE_ADMIN'];
     }
 
     /**
-     * No need to salt with bcrypt, already handled by the encoder
+     * No need to salt with bcrypt, already handled by the encoder.
      *
      * @see http://php.net/manual/fr/function.password-hash.php
      * @see https://fr.wikipedia.org/wiki/Salage_(cryptographie)
      *
      * @return null|string
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
         return null;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->plainPassword = null;
     }
 
+    /**
+     * @return mixed
+     */
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
 
+    /**
+     * @param mixed $isActive
+     *
+     * @return User
+     */
+    public function setIsActive($isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationTime(): \DateTime
+    {
+        return $this->creationTime;
+    }
+
+    /**
+     * @param \DateTime $creationTime
+     *
+     * @return User
+     */
+    public function setCreationTime(\DateTime $creationTime): self
+    {
+        $this->creationTime = $creationTime;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     *
+     * @return User
+     */
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
 }
