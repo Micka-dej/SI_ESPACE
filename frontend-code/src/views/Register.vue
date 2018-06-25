@@ -1,5 +1,6 @@
 <template>
   <div class="register-page">
+    <register-background />
     <register-form @stepData="processStepData" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
@@ -8,6 +9,7 @@
 import axios from "axios";
 
 import router from "../router/index.js";
+import RegisterBackground from "@Component/Register/Background.vue";
 import RegisterForm from "@Component/Register/Form.vue";
 import RegisterSteps from "@Component/Register/Steps.vue";
 import DataStore from "../datastore/index.js";
@@ -17,6 +19,7 @@ import "@ViewStyle/Register.scss";
 export default {
   name: "Register",
   components: {
+    RegisterBackground,
     RegisterForm,
     RegisterSteps
   },

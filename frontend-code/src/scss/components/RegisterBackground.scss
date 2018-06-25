@@ -1,0 +1,59 @@
+
+@import '../global/master';
+
+.register-background {
+  display: block;
+
+  &__image {
+    background-color: $title-color;
+    background-image: url('');
+    background-size: cover;
+    height: 65vh;
+    position: relative;
+    width: 100vw;
+    z-index: -10;
+  }
+
+  &__wave-container {
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 35vh;
+    width: 100vw;
+    z-index: -1;
+
+    &--wave {
+      background: $white;
+      border-radius: 100%;
+      left: -35%;
+      opacity: .4;
+      padding-top: 190%;
+      position: absolute;
+      top: 15%;
+      width: 200%;
+    }
+
+    &--wave-one {
+      animation: drift2 20000ms infinite linear;
+      opacity: 1;
+    }
+
+    &--wave-two {
+      animation: drift 9000ms infinite linear;
+    }
+
+    &--wave-three {
+      animation: drift 7000ms infinite linear;
+    }
+  }
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+@keyframes drift2 {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
