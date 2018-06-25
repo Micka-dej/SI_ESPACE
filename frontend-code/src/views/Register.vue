@@ -10,6 +10,7 @@ import axios from "axios";
 import router from "../router/index.js";
 import RegisterForm from "@Component/Register/Form.vue";
 import RegisterSteps from "@Component/Register/Steps.vue";
+import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Register.scss";
 
@@ -47,6 +48,7 @@ export default {
   },
   created() {
     this.actualStep = this.stepsData.email;
+    console.log(DataStore.userDetails);
   },
   methods: {
     redirectToRegister: function() {
@@ -56,6 +58,7 @@ export default {
       this.userDetails[object.type] = object.input;
       console.log(this.userDetails);
       this.actualStep = this.stepsData[this.actualStep.nextStep];
+      DataStore.userDetails = this.userDetails;
     }
   }
 };

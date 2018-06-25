@@ -9,6 +9,7 @@
 
 <script>
 import router from "../router/index.js";
+import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Login.scss";
 
@@ -26,7 +27,9 @@ export default {
       router.push("register");
     }
   },
-  created() {}
+  created() {
+    console.log(DataStore.userDetails);
+  }
 };
 </script>
 

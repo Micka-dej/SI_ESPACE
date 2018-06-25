@@ -3,10 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@Component/*": ["src/components/*"],
-      "@View/*": ["src/views/*"],
-      "@ViewStyle/*": ["src/scss/views/*"],
-      "@ComponentStyle/*": ["src/scss/components/*"]
+      "Components/*": ["src/components/*"],
+      "Views/*": ["src/views/*"],
+      "ViewStyles/*": ["src/scss/views/*"],
+      "ComponentStyles/*": ["src/scss/components/*"],
+      "DataStore": ["src/datastore/*"]
     }
   }
 }

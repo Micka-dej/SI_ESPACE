@@ -56,8 +56,9 @@ const config = {
     alias: {
       "@Component": path.resolve(__dirname, "src/components/"),
       "@View": path.resolve(__dirname, "src/views/"),
-      "@ViewStyle": path.resolve(__dirname, "src/scss/views"),
-      "@ComponentStyle": path.resolve(__dirname, "src/scss/components")
+      "@ViewStyle": path.resolve(__dirname, "src/scss/views/"),
+      "@ComponentStyle": path.resolve(__dirname, "src/scss/components/"),
+      "@DataStore": path.resolve(__dirname, "src/datastore/")
     }
   }
 };
