@@ -51,14 +51,13 @@ export default {
     console.log(DataStore.userDetails);
   },
   methods: {
-    redirectToRegister: function() {
+    redirectToRegister() {
       router.push("/register");
     },
-    processStepData: function(object) {
-      this.userDetails[object.type] = object.input;
-      console.log(this.userDetails);
+    processStepData(object) {
       this.actualStep = this.stepsData[this.actualStep.nextStep];
-      DataStore.userDetails = this.userDetails;
+      DataStore.userDetails[object.type] = object.input;
+      window.localStorage.setItem("userData", JSON.stringify(DataStore));
     }
   }
 };
