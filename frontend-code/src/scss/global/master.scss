@@ -2,6 +2,7 @@
 @import 'partials/variables';
 @import 'partials/functions';
 @import 'partials/mixins';
+@import 'partials/forsize';
 
 * {
   border: 0;
@@ -11,3 +12,8 @@
   padding: 0;
   vertical-align: baseline;
 }
+
+html {
+  font-size: 62.5%;
+}
+
