@@ -1,5 +1,6 @@
 <template>
   <div class="login-page">
+    <div class="loginprogress" v-if="isLoading"></div>
     <form v-on:submit.prevent="onSubmit">
       <input type="text" v-model="form.username" placeholder="Entrez votre nom d'utilisateur">
       <input type="text" v-model="form.password" placeholder="Entrez votre mot de passe">
@@ -11,13 +12,12 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "../APIHelper.js";
 
 import router from "../router/index.js";
 import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Login.scss";
-import Axios from "axios";
 
 export default {
   name: "Login",
@@ -27,7 +27,8 @@ export default {
       form: {
         username: "",
         password: ""
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
@@ -35,14 +36,23 @@ export default {
       router.push("register");
     },
     onSubmit() {
-      axios
-        .post("http://localhost:12000/api/login", this.form)
+      this.isLoading = true;
+      api
+        .post("/login", this.form)
         .then(response => {
-          console.log(response.data);
-          console.log(response.status);
+          if (response.status === 401) {
+            DataStore.isLoggedIn = false;
+            this.isLoading = false;
+            alert("Bad credentials");
+          } else if (response.status === 200) {
+            DataStore.isLoggedIn = true;
+          } else {
+            console.error("error");
+          }
         })
         .catch(error => {
           console.error(error);
+          this.isLoading = false;
         });
     }
   },

@@ -1,3 +1,4 @@
 export default {
-  userDetails: {}
-}
+  userDetails: {},
+  isLoggedIn: false
+};
