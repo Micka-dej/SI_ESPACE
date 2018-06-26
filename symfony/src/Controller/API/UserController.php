@@ -2,8 +2,10 @@
 
 namespace App\Controller\API;
 
+use App\Entity\User;
 use App\Service\UserService;
 use CreamIO\BaseBundle\Exceptions\APIError;
+use CreamIO\BaseBundle\Exceptions\APIException;
 use CreamIO\BaseBundle\Service\APIService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +20,6 @@ class UserController extends Controller
 {
     private const ACCEPTED_CONTENT_TYPE = 'application/json';
     private const LIST_RESULTS_FOR_IDENTIFIER = 'users-list';
-    private const LOGIN_RESULTS_FOR_IDENTIFIER = 'login';
 
     /**
      * User creation route.
@@ -26,8 +27,8 @@ class UserController extends Controller
      * @Route("/user", name="user_post", methods="POST")
      *
      * @param Request     $request     Handled HTTP request
-     * @param APIService  $APIService
-     * @param UserService $userService
+     * @param APIService  $APIService  Base API Service
+     * @param UserService $userService User service
      *
      * @return JsonResponse
      */
@@ -42,21 +43,90 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-        //$redirectionUrl = $this->generateUrl('', ['id' => $user->getId()]);
-        return $APIService->successWithoutResultsRedirected($user->getId(), $request, Response::HTTP_CREATED, '');
+        $redirectionUrl = $this->generateUrl('api_user_details', ['id' => $user->getId()]);
+
+        return $APIService->successWithoutResultsRedirected($user->getId(), $request, Response::HTTP_CREATED, $redirectionUrl);
+    }
+
+    /**
+     * User Profile route.
+     *
+     * @Route("/user/{id}", name="user_details", methods="GET")
+     *
+     * @param Request     $request     Handled HTTP request
+     * @param APIService  $APIService  Base API Service
+     * @param UserService $userService User service
+     * @param int         $id          User id to get information for
+     *
+     * @return JsonResponse
+     */
+    public function show(Request $request, APIService $APIService, UserService $userService, int $id): JsonResponse
+    {
+        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->find($id);
+        if (null === $user) {
+            throw $APIService->error(Response::HTTP_NOT_FOUND, APIError::RESOURCE_NOT_FOUND);
+        }
+
+        return $APIService->successWithResults(['user' => $user], Response::HTTP_OK, $user->getId(), $request, $userService->generateSerializer());
+    }
+
+    /**
+     * User Profiles list route.
+     *
+     * @Route("/user", name="user_details_list", methods="GET")
+     *
+     * @param Request     $request     Handled HTTP request
+     * @param APIService  $APIService  Base API Service
+     * @param UserService $userService User service
+     *
+     * @return JsonResponse
+     */
+    public function detailsList(Request $request, APIService $APIService, UserService $userService): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository(User::class);
+        $usersList = $repo->findAll();
+
+        return $APIService->successWithResults(['users' => $usersList], Response::HTTP_OK, self::LIST_RESULTS_FOR_IDENTIFIER, $request, $userService->generateSerializer());
+    }
+
+    /**
+     * User deletion route.
+     *
+     * @Route("/user/{id}", name="user_delete", methods="DELETE")
+     *
+     * @param Request    $request    Handled HTTP request
+     * @param int        $id         User id to delete
+     * @param APIService $APIService Base API Service
+     *
+     * @throws \LogicException
+     * @throws APIException
+     *
+     * @return JsonResponse
+     */
+    public function delete(Request $request, APIService $APIService, int $id): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        if (null === $user) {
+            throw $APIService->error(Response::HTTP_NOT_FOUND, APIError::RESOURCE_NOT_FOUND);
+        }
+        $em->remove($user);
+        $em->flush();
+
+        return $APIService->successWithoutResults($id, Response::HTTP_OK, $request);
     }
 
     /**
      * @Route("/login", name="user_login")
      *
-     * @param APIService $APIService
-     * @param Request    $request
+     * @param APIService $APIService Base API Service
+     * @param Request    $request    Handled HTTP request
      *
      * @return JsonResponse
      */
     public function login(APIService $APIService, Request $request)
     {
-        
         return $APIService->successWithResults('Authentication succeed', 200, 'auth', $request);
     }
 }
