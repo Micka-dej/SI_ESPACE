@@ -13,6 +13,7 @@ import RegisterSteps from "@Component/Register/Steps.vue";
 import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Register.scss";
+import api from "../APIHelper.js";
 
 export default {
   name: "Register",
@@ -24,40 +25,87 @@ export default {
     return {
       actualStep: {},
       stepsData: {
+        username: {
+          placeholder: "Votre nom d'utilisateur",
+          title: "Choissisez un nom d'utilisateur :",
+          fname: "username",
+          ftype: "text",
+          nextStep: "email"
+        },
         email: {
           placeholder: "Entrez votre e-mail",
-          title: "Adresse e-mail",
+          title: "Veuillez entrer une adresse e-mail :",
           fname: "email",
           ftype: "email",
-          nextStep: "firstname"
+          nextStep: "plainPassword"
         },
-        firstname: {
+        plainPassword: {
+          placeholder: "Votre mot de passe",
+          title: "Veuillez choisir un mot de passe :",
+          fname: "plainPassword",
+          ftype: "password",
+          nextStep: "lastName"
+        },
+        lastName: {
+          placeholder: "Entrez votre nom",
+          title: "Veuillez renseigner votre nom :",
+          fname: "lastName",
+          ftype: "text",
+          nextStep: "firstName"
+        },
+        firstName: {
           placeholder: "Entrez votre prénom",
-          title: "Prénom",
-          fname: "firstname",
+          title: "Veuillez renseigner votre prénom :",
+          fname: "firstName",
           ftype: "text",
-          nextStep: "lastname"
+          nextStep: "phoneNumber"
         },
-        lastname: {
-          placeholder: "Entez votre nom de famille",
-          title: "Nom",
-          fname: "lastname",
+        phoneNumber: {
+          placeholder: "Entrez votre numéro",
+          title: "Veuillez renseigner un numéro de téléphone :",
+          fname: "phoneNumber",
           ftype: "text",
+          nextStep: "planet"
+        },
+        planet: {
+          placeholder: "Entrez le nom de votre planète",
+          title: "De quelle planète êtes-vous originaire ?",
+          fname: "planet",
+          ftype: "text",
+          nextStep: "credits"
+        },
+        credits: {
+          placeholder: "Entrez le montant de vos crédits",
+          title: "De combien souhaitez-vous créditer votre compte ?",
+          fname: "credits",
+          ftype: "number",
           nextStep: ""
         }
       }
     };
   },
   created() {
-    this.actualStep = this.stepsData.email;
+    this.actualStep = this.stepsData.username;
   },
   methods: {
-    redirectToRegister() {
-      router.push("/register");
+    handleRegistrationSubmit() {
+      api
+        .post("/user", DataStore.userDetails)
+        .then(response => {
+          if (201 !== response.status) {
+            console.debug(response.data);
+          } else {
+            console.error(response.data);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      //router.push("/confirmation");
     },
     processStepData(object) {
       if ("" === this.actualStep.nextStep) {
-        router.push("/");
+        this.handleRegistrationSubmit();
       } else {
         this.actualStep = this.stepsData[this.actualStep.nextStep];
       }
