@@ -1,0 +1,105 @@
+
+@import '../global/master';
+
+.dashboard-page {
+  overflow: hidden;
+  width: 100vw;
+
+  .background-image {
+    background-color: $primary-color;
+    background-image: url('../../img/futurist_city.png');
+    background-size: cover;
+    height: 40vh;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    z-index: -10;
+  }
+
+  .waves {
+    background-image: url('../../img/waves.png');
+    background-size: cover;
+    height: 45vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100vw;
+    z-index: -5;
+  }
+
+  .profile-picture {
+    background: $primary-color;
+    border-radius: 100%;
+    height: 38vw;
+    left: 32vw;
+    margin: auto;
+    position: absolute;
+    top: 14vh;
+    width: 38vw;
+    z-index: 10;
+  }
+
+  .username {
+    color: $secondary-color;
+    //font-family: 'Jura-Bold';
+    font-size: 1.4rem;
+    margin-top: -6vh;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .list-container {
+    margin: 3vh auto;
+    width: 85vw;
+
+    &__item {
+      align-items: center;
+      display: flex;
+      padding: 3% 2%;
+
+      .icon {
+        background: $very-light-grey;
+        border-radius: 50%; 
+        padding-top: 20%;
+        width: 20%;
+      }
+
+      .icon-title {
+        font-size: 1.4rem;
+        padding-left: 10%;
+        width: 70%;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .button {
+    background-color: $primary-color;
+    border-radius: 60px;
+    color: $white;
+    display: block;
+    font-size: 1.2rem;
+    height: 38px;
+    margin: 5vh auto 0;
+    text-transform: uppercase;
+    transition: all .3s linear;
+    width: 50%;
+
+    &:hover {
+      background-color: $white;
+      border: 1px $primary-color solid;
+      color: $primary-color;
+      transition: all .3s linear;
+    }
+
+    &:active {
+      background-color: $white;
+      border: 1px $primary-color solid;
+      color: $primary-color;
+    }
+  }
+}
+
