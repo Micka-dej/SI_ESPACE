@@ -3,15 +3,15 @@
 namespace App\Controller\API;
 
 use App\Entity\SpaceShip;
+use App\Service\SpaceShipService;
+use CreamIO\BaseBundle\Exceptions\APIError;
+use CreamIO\BaseBundle\Exceptions\APIException;
 use CreamIO\BaseBundle\Service\APIService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class SpaceShipController.
@@ -20,60 +20,100 @@ use Symfony\Component\Serializer\Serializer;
  */
 class SpaceShipController extends Controller
 {
-    private const ACCEPTED_CONTENT_TYPE = 'json';
+    private const ACCEPTED_CONTENT_TYPE = 'application/json';
+    private const LIST_RESULTS_FOR_IDENTIFIER = 'spaceships-list';
 
     /**
-     * @Route("/spaceship", name="space_ship_index", methods="GET")
+     * Spaship details route.
+     *
+     * @Route("/spaceship", name="spaceship_list", methods="GET")
+     *
+     * @param Request    $request    Handled HTTP request
+     * @param APIService $APIService Base API Service
+     *
+     * @return JsonResponse
      */
-    public function index(Request $request, APIService $APIService): JsonResponse
+    public function list(Request $request, APIService $APIService): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(SpaceShip::class);
-        $spaceships = $repo->findAll();
+        $spaceshipsList = $repo->findAll();
 
-        return $APIService->successWithResults($spaceships, 200, 'list-spaceships', $request);
+        return $APIService->successWithResults(['users' => $spaceshipsList], Response::HTTP_OK, self::LIST_RESULTS_FOR_IDENTIFIER, $request);
     }
 
     /**
-     * @Route("/spaceship/{id}", name="space_ship_show", methods="GET")
+     * Spaship details route.
+     *
+     * @Route("/spaceship/{id}", name="spaceship_details", methods="GET")
+     *
+     * @param Request    $request    Handled HTTP request
+     * @param APIService $APIService Base API Service
+     * @param int        $id         User id to get information for
+     *
+     * @return JsonResponse
      */
-    public function show(SpaceShip $spaceship, Request $request, APIService $APIService): JsonResponse
+    public function show(Request $request, APIService $APIService, int $id): JsonResponse
     {
-        return $APIService->successWithResults($spaceship, 200, '', $request);
-    }
-
-    /**
-     * @Route("/spaceship/{id}", name="space_ship_delete", methods="DELETE")
-     */
-    public function delete(SpaceShip $spaceship, Request $request, APIService $APIService): JsonResponse
-    {
-        $em = $this->getDoctrine()->getManager();
-        $spaceshipID = $spaceship->getId();
-        $em->remove($spaceship);
-        $em->flush();
-
-        return $APIService->successWithoutResultsRedirected($spaceshipID, $request, Response::HTTP_OK, '/api/spaceship');
-    }
-
-    /**
-     * @Route("/spaceship", name="space_ship_add", methods="POST")
-     */
-    public function add(Request $request, APIService $APIService): JsonResponse
-    {
-        if (self::ACCEPTED_CONTENT_TYPE !== $request->getContentType()) {
-            throw $APIService->error(Response::HTTP_BAD_REQUEST, 'Bad content type. Use application/json instead.'.$request->getContentType());
+        $spaceship = $this->getDoctrine()->getManager()->getRepository(SpaceShip::class)->find($id);
+        if (null === $spaceship) {
+            throw $APIService->error(Response::HTTP_NOT_FOUND, APIError::RESOURCE_NOT_FOUND);
         }
-        $encoders = [new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
-        $content = $request->getContent();
-        /** @var SpaceShip $spaceship */
-        $spaceship = $serializer->deserialize($content, Spaceship::class, 'json');
-        $APIService->validateEntity($spaceship);
+
+        return $APIService->successWithResults(['spaceship' => $spaceship], Response::HTTP_OK, $spaceship->getId(), $request);
+    }
+
+    /**
+     * Spaceship deletion route.
+     *
+     * @Route("/spaceship/{id}", name="spaceship_delete", methods="DELETE")
+     *
+     * @param Request    $request    Handled HTTP request
+     * @param int        $id         User id to delete
+     * @param APIService $APIService Base API Service
+     *
+     * @throws \LogicException
+     * @throws APIException
+     *
+     * @return JsonResponse
+     */
+    public function delete(Request $request, APIService $APIService, int $id): JsonResponse
+    {
         $em = $this->getDoctrine()->getManager();
-        $em->persist($spaceship);
+        $spaceShip = $em->getRepository(SpaceShip::class)->find($id);
+        if (null === $spaceShip) {
+            throw $APIService->error(Response::HTTP_NOT_FOUND, APIError::RESOURCE_NOT_FOUND);
+        }
+        $em->remove($spaceShip);
         $em->flush();
 
-        return $APIService->successWithResults($spaceship, 200, $spaceship->getId(), $request);
+        return $APIService->successWithoutResults($id, Response::HTTP_OK, $request);
+    }
+
+    /**
+     * SpaceShip creation route.
+     *
+     * @Route("/spaceship", name="user_post", methods="POST")
+     *
+     * @param Request          $request          Handled HTTP request
+     * @param APIService       $APIService       Base API Service
+     * @param SpaceShipService $spaceShipService SapceShip Service
+     *
+     * @return JsonResponse
+     */
+    public function create(Request $request, APIService $APIService, SpaceShipService $spaceShipService): JsonResponse
+    {
+        if (self::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
+            throw $APIService->error(Response::HTTP_BAD_REQUEST, APIError::INVALID_CONTENT_TYPE);
+        }
+        $data = $request->getContent();
+        $spaceShip = $spaceShipService->generateSpaceShipFromJSON($data);
+        $APIService->validateEntity($spaceShip);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($spaceShip);
+        $em->flush();
+        $redirectionUrl = $this->generateUrl('api_spaceship_details', ['id' => $spaceShip->getId()]);
+
+        return $APIService->successWithoutResultsRedirected($spaceShip->getId(), $request, Response::HTTP_CREATED, $redirectionUrl);
     }
 }
