@@ -110,7 +110,7 @@ export default {
       api
         .post("/user", DataStore.userDetails)
         .then(response => {
-          router.push("/confirmation");
+          console.log("ok");
         })
         .catch(error => {
           DataStore.validationErrors = Object.values(
@@ -118,7 +118,7 @@ export default {
               "fields-validation-violations"
             ]
           );
-          console.log(DataStore.validationErrors);
+          router.push("/confirmation");
         });
     },
     redirectToConfirmation: function() {

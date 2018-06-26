@@ -19,13 +19,16 @@ export default {
   },
   data() {
     return {
-      errors: ["Vous devez renseigner un nom de famille", "Vous devez renseigner un email"]
-    }
+      errors: []
+    };
   },
   methods: {
     redirectToConfirmation() {
       router.push("/confirmation");
     }
+  },
+  created() {
+    this.errors = DataStore.validationErrors;
   }
 };
 </script>
