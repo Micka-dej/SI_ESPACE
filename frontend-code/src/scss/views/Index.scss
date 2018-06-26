@@ -1,5 +1,45 @@
 @import '../global/master';
 
-.page-title {
-  color: $primary-color;
+.home-page {
+  text-align: center;
+
+  &__button {
+    background-color: $secondary-color;
+    border-radius: 60px;
+    color: $white;
+    display: block;
+    font-size: 1.3rem;
+    height: 28px;
+    margin: 30px auto 60px;
+    transition: all .3s linear;
+    width: 40%;
+
+    &:hover {
+      background-color: $white;
+      border: 1px $secondary-color solid;
+      color: $secondary-color;
+      transition: all .3s linear;
+    }
+
+    &:active {
+      background-color: $white;
+      border: 1px $secondary-color solid;
+      color: $secondary-color;
+    }
+  }
+
+  &__link {
+    color: $primary-color;
+    transition: color .3s linear;
+
+    &:hover {
+      color: $secondary-color;
+      transition: color .3s linear;
+    }
+
+    &:active {
+      color: $secondary-color;
+    }
+  }
 }
+

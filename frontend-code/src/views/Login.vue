@@ -1,12 +1,10 @@
 <template>
   <div class="login-page">
-    <div class="login-page-loader" v-if="isLoading">
-      
-    </div>
+    <helperBackground/>
+    <div class="login-page-loader" v-if="isLoading"></div>
     <form v-on:submit.prevent="onSubmit">
       <input type="text" v-model="form.username" placeholder="Entrez votre nom d'utilisateur">
       <input type="password" v-model="form.password" placeholder="Entrez votre mot de passe">
-
       <button type="submit">Se connecter</button>
     </form>
     <a v-on:click="redirectToRegister">Créer un compte utilisateur</a>
@@ -18,12 +16,16 @@ import api from "../APIHelper.js";
 
 import router from "../router/index.js";
 import DataStore from "../datastore/index.js";
+import HelperBackground from "@Component/Helper/Background.vue";
+
 
 import "@ViewStyle/Login.scss";
 
 export default {
   name: "Login",
-  components: {},
+  components: {
+    HelperBackground
+  },
   data() {
     return {
       form: {
