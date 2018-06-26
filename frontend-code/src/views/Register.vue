@@ -1,13 +1,6 @@
 <template>
   <div class="register-page">
-    <div class="register-background">
-      <div class="register-background__image"></div>
-      <div class="register-background__wave-container">
-        <div class="register-background__wave-container--wave register-background__wave-container--wave-one"></div>
-        <div class="register-background__wave-container--wave register-background__wave-container--wave-two"></div>
-        <div class="register-background__wave-container--wave register-background__wave-container--wave-three"></div>
-      </div>
-    </div>
+    <helperBackground/>
     <register-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
@@ -18,6 +11,7 @@ import axios from "axios";
 import router from "../router/index.js";
 import RegisterForm from "@Component/Register/Form.vue";
 import RegisterSteps from "@Component/Register/Steps.vue";
+import HelperBackground from "@Component/Helper/Background.vue";
 import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Register.scss";
@@ -26,6 +20,7 @@ import api from "../APIHelper.js";
 export default {
   name: "Register",
   components: {
+    HelperBackground,
     RegisterForm,
     RegisterSteps
   },
