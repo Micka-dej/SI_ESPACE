@@ -1,10 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import Index from "../views/Index.vue";
-import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
-import Confirmation from "../views/Confirmation.vue";
+import Index from "@View/Index.vue";
+import Login from "@View/Login.vue";
+import Register from "@View/Register.vue";
+import Confirmation from "@View/Confirmation.vue";
+import Dashboard from "@View/Dashboard.vue";
 
 Vue.use(Router);
 
@@ -40,6 +41,14 @@ const router = new Router({
       component: Confirmation,
       meta: {
         title: "Confirmation de compte"
+      }
+    },
+    {
+      path: "/dashboard",
+      name: "Dashboard",
+      component: Dashboard,
+      meta: {
+        title: "Profil"
       }
     }
   ]
