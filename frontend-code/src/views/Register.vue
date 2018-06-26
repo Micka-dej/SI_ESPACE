@@ -1,6 +1,6 @@
 <template>
   <div class="register-page">
-    <register-form @stepData="processStepData" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
+    <register-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
 
@@ -13,6 +13,7 @@ import RegisterSteps from "@Component/Register/Steps.vue";
 import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Register.scss";
+import api from "../APIHelper.js";
 
 export default {
   name: "Register",
@@ -24,40 +25,97 @@ export default {
     return {
       actualStep: {},
       stepsData: {
+        username: {
+          placeholder: "Votre nom d'utilisateur",
+          title: "Choissisez un nom d'utilisateur :",
+          fname: "username",
+          ftype: "text",
+          defaultValue: "",
+          nextStep: "email"
+        },
         email: {
           placeholder: "Entrez votre e-mail",
-          title: "Adresse e-mail",
+          title: "Veuillez entrer une adresse e-mail :",
           fname: "email",
           ftype: "email",
-          nextStep: "firstname"
+          defaultValue: "",
+          nextStep: "plainPassword"
         },
-        firstname: {
+        plainPassword: {
+          placeholder: "Votre mot de passe",
+          title: "Veuillez choisir un mot de passe :",
+          fname: "plainPassword",
+          ftype: "password",
+          defaultValue: "",
+          nextStep: "lastName"
+        },
+        lastName: {
+          placeholder: "Entrez votre nom",
+          title: "Veuillez renseigner votre nom :",
+          fname: "lastName",
+          ftype: "text",
+          defaultValue: "",
+          nextStep: "firstName"
+        },
+        firstName: {
           placeholder: "Entrez votre prénom",
-          title: "Prénom",
-          fname: "firstname",
+          title: "Veuillez renseigner votre prénom :",
+          fname: "firstName",
           ftype: "text",
-          nextStep: "lastname"
+          defaultValue: "",
+          nextStep: "phoneNumber"
         },
-        lastname: {
-          placeholder: "Entez votre nom de famille",
-          title: "Nom",
-          fname: "lastname",
+        phoneNumber: {
+          placeholder: "Entrez votre numéro",
+          title: "Veuillez renseigner un numéro de téléphone :",
+          fname: "phoneNumber",
           ftype: "text",
+          defaultValue: "",
+          nextStep: "planet"
+        },
+        planet: {
+          placeholder: "Entrez le nom de votre planète",
+          title: "De quelle planète êtes-vous originaire ?",
+          fname: "planet",
+          ftype: "text",
+          defaultValue: "",
+          nextStep: "credits"
+        },
+        credits: {
+          placeholder: "Entrez le montant de vos crédits",
+          title: "De combien souhaitez-vous créditer votre compte ?",
+          fname: "credits",
+          ftype: "number",
+          defaultValue: "0",
           nextStep: ""
         }
       }
     };
   },
   created() {
-    this.actualStep = this.stepsData.email;
+    this.actualStep = this.stepsData.username;
+    DataStore.validationErrors = [];
   },
   methods: {
-    redirectToRegister() {
-      router.push("/register");
+    handleRegistrationSubmit() {
+      console.log(DataStore.userDetails);
+      api
+        .post("/user", DataStore.userDetails)
+        .then(response => {
+          router.push("/confirmation");
+        })
+        .catch(error => {
+          DataStore.validationErrors = Object.values(
+            error.response.data["additional-informations"][
+              "fields-validation-violations"
+            ]
+          );
+          console.log(DataStore.validationErrors);
+        });
     },
     processStepData(object) {
       if ("" === this.actualStep.nextStep) {
-        router.push("/");
+        this.handleRegistrationSubmit();
       } else {
         this.actualStep = this.stepsData[this.actualStep.nextStep];
       }

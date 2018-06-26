@@ -2,7 +2,7 @@
   <div class="register-form">
     <h3>{{ labelInfo }}</h3>
     <form v-on:submit.prevent="onSubmit">
-      <input v-model="inputValue" :type="inputType" :placeholder="inputPlaceholder" />
+      <input v-model="defaultValue" :type="inputType" :placeholder="inputPlaceholder"  />
       <button type="submit">Suivant</button>
     </form>
   </div>
@@ -32,14 +32,17 @@ export default {
       type: String
     },
     inputType: {
-      require: true,
+      required: true,
+      type: String
+    },
+    defaultValue: {
+      required: true,
       type: String
     }
   },
   methods: {
     onSubmit() {
-      this.$emit("stepData", { type: this.fieldName, input: this.inputValue });
-      this.inputValue = "";
+      this.$emit("stepData", { type: this.fieldName, input: this.defaultValue });
     }
   }
 };
