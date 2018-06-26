@@ -1,3 +1,5 @@
 export default {
-  userDetails: {}
-}
+  userDetails: {},
+  validationErrors: [],
+  isLoggedIn: false
+};
