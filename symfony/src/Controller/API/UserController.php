@@ -81,7 +81,7 @@ class UserController extends Controller
      *
      * @return JsonResponse
      */
-    public function detailsList(Request $request, APIService $APIService, UserService $userService): JsonResponse
+    public function list(Request $request, APIService $APIService, UserService $userService): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(User::class);
