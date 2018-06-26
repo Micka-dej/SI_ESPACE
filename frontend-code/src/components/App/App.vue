@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import DataStore from "../../datastore/index.js";
 import api from "../../APIHelper.js";
 
 export default {
@@ -17,37 +16,41 @@ export default {
     updateLocalStorage() {
       window.localStorage.setItem(
         "userIsLoggedIn",
-        JSON.stringify(DataStore.isLoggedIn)
+        JSON.stringify(this.$store.getters.isLoggedIn)
       );
       window.localStorage.setItem(
         "userData",
-        JSON.stringify(DataStore.userDetails)
+        JSON.stringify(this.$store.getters.userDetails)
       );
     }
   },
   created() {
-    DataStore.userDetails =
+    this.$store.commit(
+      "setUserDetails",
       JSON.parse(window.localStorage.getItem("userData")) ||
-      DataStore.userDetails;
-    DataStore.isLoggedIn =
+        this.$store.getters.userDetails
+    );
+    this.$store.commit(
+      "setIsLoggedIn",
       JSON.parse(window.localStorage.getItem("userIsLoggedIn")) ||
-      DataStore.isLoggedIn;
+        this.$store.getters.isLoggedIn
+    );
 
-    if (DataStore.isLoggedIn) {
+    if (this.$store.getters.isLoggedIn) {
       api
         .get("/checklogin")
         .then(response => {
           if (200 === response.status) {
-            DataStore.isLoggedIn = true;
+            this.$store.commit("setIsLoggedIn", true);
           } else {
-            DataStore.isLoggedIn = false;
-            DataStore.userDetails = {};
+            this.$store.commit("setIsLoggedIn", false);
+            this.$store.commit("setUserDetails", {});
           }
           this.updateLocalStorage();
         })
         .catch(error => {
-          DataStore.isLoggedIn = false;
-          DataStore.userDetails = {};
+          this.$store.commit("setIsLoggedIn", false);
+          this.$store.commit("setUserDetails", {});
           this.updateLocalStorage();
         });
     }

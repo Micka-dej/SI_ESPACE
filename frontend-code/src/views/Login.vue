@@ -15,9 +15,7 @@
 import api from "../APIHelper.js";
 
 import router from "../router/index.js";
-import DataStore from "../datastore/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
-
 
 import "@ViewStyle/Login.scss";
 
@@ -42,11 +40,11 @@ export default {
     updateLocalStorage() {
       window.localStorage.setItem(
         "userIsLoggedIn",
-        JSON.stringify(DataStore.isLoggedIn)
+        JSON.stringify(this.$store.getters.isLoggedIn)
       );
       window.localStorage.setItem(
         "userData",
-        JSON.stringify(DataStore.userDetails)
+        JSON.stringify(this.$store.getters.userDetails)
       );
     },
     onSubmit() {
@@ -56,11 +54,11 @@ export default {
         .post("/login", this.form)
         .then(response => {
           if (response.status === 200) {
-            DataStore.isLoggedIn = true;
-            DataStore.userDetails = response.data.results.user;
+            this.$store.commit("setIsLoggedIn", true);
+            this.$store.commit("setUserDetails", response.data.results.user);
           } else {
-            console.error("error");
-            DataStore.isLoggedIn = false;
+            this.$store.commit("setUserDetails", {});
+            this.$store.commit("setIsLoggedIn", false);
           }
           this.isLoading = false;
           this.updateLocalStorage();
@@ -68,7 +66,8 @@ export default {
         .catch(error => {
           console.error(error);
           this.isLoading = false;
-          DataStore.isLoggedIn = false;
+          this.$store.commit("setIsLoggedIn", false);
+          this.$store.commit("setUserDetails", {});
           this.updateLocalStorage();
         });
     }

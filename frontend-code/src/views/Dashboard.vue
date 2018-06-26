@@ -5,7 +5,7 @@
       <img class="profile-picture__img" src="" alt="">
     </div>
     <div class="waves"></div>
-    <p class="username"> {{userDatas.username}} </p>
+    <p class="username"> {{ userDatas.username }} </p>
     <ul class="list-container">
       <li class="list-container__item" v-on:click="redirectToUserInfos" >
         <div class="icon"></div>
@@ -26,7 +26,6 @@
 
 <script>
 import router from "../router/index.js";
-import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Dashboard.scss";
 
@@ -35,25 +34,17 @@ export default {
   components: {},
   data() {
     return {
-      userDatas: {
-        credits: "0",
-        email: "test@test.com",
-        firstName: "TestFirstName",
-        lastName: "TestName",
-        phoneNumber: "+33660181095",
-        planet: "TestPlanet",
-        username: "Stell04"
-      }
+      userDatas: this.$store.getters.userDetails
     };
   },
   methods: {
-    redirectToUserInfos: function () {
-    router.push('/userInfos');
+    redirectToUserInfos: function() {
+      router.push("/userInfos");
     }
   },
   beforeMount() {
-    if (true !== DataStore.isLoggedIn) {
-      router.push('/login');
+    if (true !== this.$store.getters.isLoggedIn) {
+      router.push("/login");
     }
   }
 };

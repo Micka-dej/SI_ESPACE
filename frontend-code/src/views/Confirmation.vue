@@ -6,7 +6,6 @@
 
 <script>
 import router from "../router/index.js";
-import DataStore from "../datastore/index.js";
 
 import HelperModal from "@Component/Helper/Modal.vue";
 
@@ -28,7 +27,7 @@ export default {
     }
   },
   created() {
-    this.errors = DataStore.validationErrors;
+    this.errors = this.$store.getters.validationErrors;
   }
 };
 </script>

@@ -12,7 +12,6 @@ import router from "../router/index.js";
 import RegisterForm from "@Component/Register/Form.vue";
 import RegisterSteps from "@Component/Register/Steps.vue";
 import HelperBackground from "@Component/Helper/Background.vue";
-import DataStore from "../datastore/index.js";
 
 import "@ViewStyle/Register.scss";
 import api from "../APIHelper.js";
@@ -97,24 +96,27 @@ export default {
   },
   created() {
     this.stepsData.username.defaultValue =
-      DataStore.registrationDetails.username ||
+      this.$store.getters.registrationDetails.username ||
       this.stepsData.username.defaultValue;
     this.actualStep = this.stepsData.username;
-    DataStore.validationErrors = [];
+    this.$store.commit("setValidationErrors", []);
   },
   methods: {
     handleRegistrationSubmit() {
-      console.log(DataStore.registrationDetails);
+      console.log(this.$store.getters.registrationDetails);
       api
-        .post("/user", DataStore.registrationDetails)
+        .post("/user", this.$store.getters.registrationDetails)
         .then(response => {
-          console.log("ok");
+          router.push("/login");
         })
         .catch(error => {
-          DataStore.validationErrors = Object.values(
-            error.response.data["additional-informations"][
-              "fields-validation-violations"
-            ]
+          this.$store.commit(
+            "setValidationErrors",
+            Object.values(
+              error.response.data["additional-informations"][
+                "fields-validation-violations"
+              ]
+            )
           );
           this.redirectToConfirmation();
         });
@@ -127,13 +129,13 @@ export default {
         this.handleRegistrationSubmit();
       } else {
         this.stepsData[this.actualStep.nextStep].defaultValue =
-          DataStore.registrationDetails[this.actualStep.nextStep] ||
+          this.$store.getters.registrationDetails[this.actualStep.nextStep] ||
           this.stepsData[this.actualStep.nextStep].defaultValue;
         this.actualStep = this.stepsData[this.actualStep.nextStep];
       }
 
-      DataStore.registrationDetails[object.type] = object.input;
-      console.log(DataStore.registrationDetails);
+      this.$store.commit("addRegistrationDetails", [object.type, object.input]);
+      console.log(this.$store.getters.registrationDetails);
     }
   }
 };

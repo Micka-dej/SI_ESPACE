@@ -6,7 +6,6 @@
 
 <script>
 import router from "../router/index.js";
-import DataStore from "../datastore/index.js";
 
 //import "@ViewStyle/UserInfos.scss";
 
