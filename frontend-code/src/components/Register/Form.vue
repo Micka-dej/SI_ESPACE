@@ -1,9 +1,9 @@
 <template>
   <div class="register-form">
-    <h3>{{ labelInfo }}</h3>
-    <form v-on:submit.prevent="onSubmit">
-      <input v-model="defaultValue" :type="inputType" :placeholder="inputPlaceholder"  />
-      <button type="submit">Suivant</button>
+    <h3 class="register-form__title">{{ labelInfo }}</h3>
+    <form class="register-form__form" v-on:submit.prevent="onSubmit">
+      <input class="register-form__input" v-model="inputValue" :type="inputType" :placeholder="inputPlaceholder" />
+      <button class="register-form__button" type="submit">Suivant</button>
     </form>
   </div>
 </template>

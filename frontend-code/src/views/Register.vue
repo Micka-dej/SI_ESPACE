@@ -1,5 +1,13 @@
 <template>
   <div class="register-page">
+    <div class="register-background">
+      <div class="register-background__image"></div>
+      <div class="register-background__wave-container">
+        <div class="register-background__wave-container--wave register-background__wave-container--wave-one"></div>
+        <div class="register-background__wave-container--wave register-background__wave-container--wave-two"></div>
+        <div class="register-background__wave-container--wave register-background__wave-container--wave-three"></div>
+      </div>
+    </div>
     <register-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
@@ -27,7 +35,7 @@ export default {
       stepsData: {
         username: {
           placeholder: "Votre nom d'utilisateur",
-          title: "Choissisez un nom d'utilisateur :",
+          title: "Choisissez un nom d'utilisateur :",
           fname: "username",
           ftype: "text",
           defaultValue: "",
@@ -112,6 +120,9 @@ export default {
           );
           console.log(DataStore.validationErrors);
         });
+    },
+    redirectToConfirmation: function() {
+      router.push("confirmation");
     },
     processStepData(object) {
       if ("" === this.actualStep.nextStep) {
