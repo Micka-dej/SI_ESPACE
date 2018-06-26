@@ -46,17 +46,23 @@ export default {
         .then(response => {
           if (response.status === 401) {
             DataStore.isLoggedIn = false;
+            DataStore.userId = null;
             alert("Bad credentials");
           } else if (response.status === 200) {
             DataStore.isLoggedIn = true;
+            //DataStore.userId = response.data.user.id;
+            router.push('/dashboard');
           } else {
-            console.error("error");
+            DataStore.isLoggedIn = false;
+            DataStore.userId = null;
           }
           this.isLoading = false;
         })
         .catch(error => {
           console.error(error);
           this.isLoading = false;
+          DataStore.userId = null;
+          DataStore.isLoggedIn = false;
         });
     }
   }
