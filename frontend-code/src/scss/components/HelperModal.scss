@@ -1,0 +1,66 @@
+
+@import '../global/master';
+
+.modal {
+
+  &__overlay {
+    background-color: $primary-color;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+
+  .list-container {
+    background: $white;
+    border-radius: 30px;
+    margin: 50% auto;
+    padding: 10%;
+    position: relative;
+    width: 80%;
+    z-index: 50;
+
+    .list {
+      text-align: left;
+
+      &__item {
+        font-size: 1.2rem;
+        list-style: square;
+        padding: 2% 0;
+      }
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+
+    &__button {
+      background-color: $white;
+      border: 1px $secondary-color solid;
+      border-radius: 60px;
+      color: $secondary-color;
+      font-size: 1.2rem;
+      height: 28px;
+      margin: auto;
+      text-align: center;
+      width: 150px;
+      
+
+      &:hover {
+        background-color: $secondary-color;
+        color: $white;
+        cursor: pointer;
+      }
+
+      &:target {
+        background-color: $secondary-color;
+        color: $white;
+      }
+    }
+  }
+}

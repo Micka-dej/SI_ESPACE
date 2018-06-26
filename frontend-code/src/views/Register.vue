@@ -35,7 +35,7 @@ export default {
       stepsData: {
         username: {
           placeholder: "Votre nom d'utilisateur",
-          title: "Choissisez un nom d'utilisateur :",
+          title: "Choisissez un nom d'utilisateur :",
           fname: "username",
           nextStep: "email"
         },
@@ -85,7 +85,7 @@ export default {
     };
   },
   created() {
-    this.actualStep = this.stepsData.email;
+    this.actualStep = this.stepsData.username;
     console.log(DataStore.userDetails);
   },
   methods: {
