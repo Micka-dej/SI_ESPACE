@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity("email")
- * @UniqueEntity("username")
- * @UniqueEntity("phoneNumber")
+ * @UniqueEntity("email", message="Cet adresse e-mail existe déjà")
+ * @UniqueEntity("username", message="Ce nom d'utilisateur existe déjà")
+ * @UniqueEntity("phoneNumber", message="Ce numéro de téléphone existe déjà")
  */
 class User implements UserInterface, \Serializable
 {
@@ -33,8 +33,8 @@ class User implements UserInterface, \Serializable
      *
      * @var null|string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="50", maxMessage="User's last name must not exceed {{ limit }} characters.")
+     * @Assert\NotBlank(message="Vous devez renseigner un nom de famille")
+     * @Assert\Length(max="50", maxMessage="Le nom de famille ne peut excéder {{ limit }} caractères.")
      */
     private $lastName;
 
@@ -45,8 +45,8 @@ class User implements UserInterface, \Serializable
      *
      * @var null|string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="50", maxMessage="User's first name must not exceed {{ limit }} characters.")
+     * @Assert\NotBlank(message="Vous devez renseigner un prénom")
+     * @Assert\Length(max="50", maxMessage="Le prénom ne peut excéder {{ limit }} caractères.")
      */
     private $firstName;
 
@@ -57,9 +57,9 @@ class User implements UserInterface, \Serializable
      *
      * @var null|string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner un e-mail")
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
+     *     message = "L'adresse e-mail '{{ value }}' n'est pas valide."
      * )
      */
     private $email;
@@ -71,8 +71,8 @@ class User implements UserInterface, \Serializable
      *
      * @var null|string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="20", maxMessage="User's planet must not exceed {{ limit }} characters.")
+     * @Assert\NotBlank(message="Vous devez renseigner une planète d'origine")
+     * @Assert\Length(max="20", maxMessage="Le nom de la planète d'origine ne peut excéder {{ limit }} caractères.")
      */
     private $planet;
 
@@ -83,8 +83,8 @@ class User implements UserInterface, \Serializable
      *
      * @var null|string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="30", maxMessage="User's username must not exceed {{ limit }} characters.")
+     * @Assert\NotBlank(message="Vous devez renseigner un nom d'utilisateur")
+     * @Assert\Length(max="30", maxMessage="Le nom d'utilisateur d'origine ne peut excéder {{ limit }} caractères.")
      */
     private $username;
 
@@ -95,8 +95,8 @@ class User implements UserInterface, \Serializable
      *
      * @var null|string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="20", maxMessage="User's phone number must not exceed {{ limit }} characters.")
+     * @Assert\NotBlank(message="Vous devez renseigner un numéro de téléphone")
+     * @Assert\Length(max="20", maxMessage="Le numéro de téléphone ne peut excéder {{ limit }} caractères.")
      */
     private $phoneNumber;
 
@@ -116,7 +116,7 @@ class User implements UserInterface, \Serializable
      *
      * @var null|int
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner un nombre de crédits")
      * @Assert\GreaterThanOrEqual(
      *     value = 0
      * )
@@ -153,8 +153,8 @@ class User implements UserInterface, \Serializable
      *
      * @var null|string
      *
-     * @Assert\NotBlank(message="Password can't be blank")
-     * @Assert\Length(min="5", max="4096", minMessage="Password's lenght must be at least {{ limit }} characters", maxMessage="Password's lenght can't be above {{ limit }} characters")
+     * @Assert\NotBlank(message="Vous devez renseigner un mot de passe")
+     * @Assert\Length(min="5", max="4096", minMessage="Le mot de passe doit faire plus de {{ limit }} caractères", maxMessage="Le mot de passe ne peut excéder {{ limit }} caractères.")
      */
     private $plainPassword;
 
