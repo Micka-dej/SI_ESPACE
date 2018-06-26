@@ -3,6 +3,7 @@
 @import 'partials/functions';
 @import 'partials/mixins';
 @import 'partials/forsize';
+@import 'partials/fonts';
 
 * {
   border: 0;
@@ -18,3 +19,6 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  font-family: 'Jura-Regular';
+}
