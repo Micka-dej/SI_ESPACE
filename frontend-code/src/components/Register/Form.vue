@@ -2,7 +2,7 @@
   <div class="register-form">
     <h3 class="register-form__title">{{ labelInfo }}</h3>
     <form class="register-form__form" v-on:submit.prevent="onSubmit">
-      <input class="register-form__input" v-model="defaultValue" :type="inputType" :placeholder="inputPlaceholder" />
+      <input class="register-form__input" v-model="inputValue" :type="inputType" :placeholder="inputPlaceholder" />
       <button class="register-form__button" type="submit">Suivant</button>
     </form>
   </div>
@@ -15,7 +15,7 @@ export default {
   name: "RegisterForm",
   data() {
     return {
-      inputValue: ""
+      inputValue: this.defaultValue
     };
   },
   props: {
@@ -44,8 +44,14 @@ export default {
     onSubmit() {
       this.$emit("stepData", {
         type: this.fieldName,
-        input: this.defaultValue
+        input: this.inputValue
       });
+      this.inputValue = this.defaultValue;
+    }
+  },
+  watch: {
+    defaultValue: function() {
+      this.inputValue = this.defaultValue;
     }
   }
 };

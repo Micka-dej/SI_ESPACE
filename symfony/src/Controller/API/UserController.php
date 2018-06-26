@@ -7,6 +7,7 @@ use App\Service\UserService;
 use CreamIO\BaseBundle\Exceptions\APIError;
 use CreamIO\BaseBundle\Exceptions\APIException;
 use CreamIO\BaseBundle\Service\APIService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,6 +54,8 @@ class UserController extends Controller
      *
      * @Route("/user/{id}", name="user_details", methods="GET")
      *
+     * @IsGranted("ROLE_MEMBER", statusCode=401, message="Access denied")
+     *
      * @param Request     $request     Handled HTTP request
      * @param APIService  $APIService  Base API Service
      * @param UserService $userService User service
@@ -75,6 +78,8 @@ class UserController extends Controller
      *
      * @Route("/user", name="user_details_list", methods="GET")
      *
+     * @IsGranted("ROLE_ADMIN", statusCode=401, message="Access denied")
+     *
      * @param Request     $request     Handled HTTP request
      * @param APIService  $APIService  Base API Service
      * @param UserService $userService User service
@@ -94,6 +99,8 @@ class UserController extends Controller
      * User deletion route.
      *
      * @Route("/user/{id}", name="user_delete", methods="DELETE")
+     *
+     * @IsGranted("ROLE_ADMIN", statusCode=401, message="Access denied")
      *
      * @param Request    $request    Handled HTTP request
      * @param int        $id         User id to delete
@@ -118,15 +125,36 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/login", name="user_login")
+     * @Route("/login", name="user_login", methods="POST")
      *
-     * @param APIService $APIService Base API Service
-     * @param Request    $request    Handled HTTP request
+     * @param APIService  $APIService  Base API Service
+     * @param Request     $request     Handled HTTP request
+     * @param UserService $userService User service
      *
      * @return JsonResponse
      */
-    public function login(APIService $APIService, Request $request)
+    public function login(APIService $APIService, UserService $userService, Request $request)
     {
-        return $APIService->successWithResults('Authentication succeed', 200, 'auth', $request);
+        $user = $this->getUser();
+        if (null === $user) {
+            throw $APIService->error(Response::HTTP_FORBIDDEN, APIError::RESOURCE_NOT_FOUND);
+        }
+
+        return $APIService->successWithResults(['user' => $user], Response::HTTP_OK, $user->getId(), $request, $userService->generateSerializer());
+    }
+
+    /**
+     * @Route("/checklogin", name="user_check_login", methods="GET")
+     *
+     * @return JsonResponse
+     */
+    public function checkIsLoggedIn(): JsonResponse
+    {
+        $user = $this->getUser();
+        if (null === $user) {
+            return new JsonResponse(['Authorization' => false], Response::HTTP_FORBIDDEN);
+        }
+
+        return new JsonResponse(['Authorization' => true], Response::HTTP_OK);
     }
 }

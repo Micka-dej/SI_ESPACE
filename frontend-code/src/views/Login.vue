@@ -39,30 +39,37 @@ export default {
     redirectToRegister: function() {
       router.push("register");
     },
+    updateLocalStorage() {
+      window.localStorage.setItem(
+        "userIsLoggedIn",
+        JSON.stringify(DataStore.isLoggedIn)
+      );
+      window.localStorage.setItem(
+        "userData",
+        JSON.stringify(DataStore.userDetails)
+      );
+    },
     onSubmit() {
       this.isLoading = true;
+
       api
         .post("/login", this.form)
         .then(response => {
-          if (response.status === 401) {
-            DataStore.isLoggedIn = false;
-            DataStore.userId = null;
-            alert("Bad credentials");
-          } else if (response.status === 200) {
+          if (response.status === 200) {
             DataStore.isLoggedIn = true;
-            //DataStore.userId = response.data.user.id;
-            router.push('/dashboard');
+            DataStore.userDetails = response.data.results.user;
           } else {
+            console.error("error");
             DataStore.isLoggedIn = false;
-            DataStore.userId = null;
           }
           this.isLoading = false;
+          this.updateLocalStorage();
         })
         .catch(error => {
           console.error(error);
           this.isLoading = false;
-          DataStore.userId = null;
           DataStore.isLoggedIn = false;
+          this.updateLocalStorage();
         });
     }
   }

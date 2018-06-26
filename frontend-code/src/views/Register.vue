@@ -96,14 +96,17 @@ export default {
     };
   },
   created() {
+    this.stepsData.username.defaultValue =
+      DataStore.registrationDetails.username ||
+      this.stepsData.username.defaultValue;
     this.actualStep = this.stepsData.username;
     DataStore.validationErrors = [];
   },
   methods: {
     handleRegistrationSubmit() {
-      console.log(DataStore.userDetails);
+      console.log(DataStore.registrationDetails);
       api
-        .post("/user", DataStore.userDetails)
+        .post("/user", DataStore.registrationDetails)
         .then(response => {
           console.log("ok");
         })
@@ -113,7 +116,7 @@ export default {
               "fields-validation-violations"
             ]
           );
-          router.push("/confirmation");
+          this.redirectToConfirmation();
         });
     },
     redirectToConfirmation: function() {
@@ -123,13 +126,14 @@ export default {
       if ("" === this.actualStep.nextStep) {
         this.handleRegistrationSubmit();
       } else {
+        this.stepsData[this.actualStep.nextStep].defaultValue =
+          DataStore.registrationDetails[this.actualStep.nextStep] ||
+          this.stepsData[this.actualStep.nextStep].defaultValue;
         this.actualStep = this.stepsData[this.actualStep.nextStep];
       }
-      DataStore.userDetails[object.type] = object.input;
-      window.localStorage.setItem(
-        "userData",
-        JSON.stringify(DataStore.userDetails)
-      );
+
+      DataStore.registrationDetails[object.type] = object.input;
+      console.log(DataStore.registrationDetails);
     }
   }
 };
