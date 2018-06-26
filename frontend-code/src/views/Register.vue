@@ -1,6 +1,6 @@
 <template>
   <div class="register-page">
-    <register-form @stepData="processStepData" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
+    <register-form @stepData="processStepData" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
 
@@ -22,25 +22,27 @@ export default {
   },
   data() {
     return {
-      userDetails: {},
       actualStep: {},
       stepsData: {
         email: {
           placeholder: "Entrez votre e-mail",
           title: "Adresse e-mail",
           fname: "email",
+          ftype: "email",
           nextStep: "firstname"
         },
         firstname: {
           placeholder: "Entrez votre prénom",
           title: "Prénom",
           fname: "firstname",
+          ftype: "text",
           nextStep: "lastname"
         },
         lastname: {
           placeholder: "Entez votre nom de famille",
           title: "Nom",
           fname: "lastname",
+          ftype: "text",
           nextStep: ""
         }
       }
@@ -48,16 +50,22 @@ export default {
   },
   created() {
     this.actualStep = this.stepsData.email;
-    console.log(DataStore.userDetails);
   },
   methods: {
     redirectToRegister() {
       router.push("/register");
     },
     processStepData(object) {
-      this.actualStep = this.stepsData[this.actualStep.nextStep];
+      if ("" === this.actualStep.nextStep) {
+        router.push("/");
+      } else {
+        this.actualStep = this.stepsData[this.actualStep.nextStep];
+      }
       DataStore.userDetails[object.type] = object.input;
-      window.localStorage.setItem("userData", JSON.stringify(DataStore));
+      window.localStorage.setItem(
+        "userData",
+        JSON.stringify(DataStore.userDetails)
+      );
     }
   }
 };

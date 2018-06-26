@@ -2,7 +2,7 @@
   <div class="register-form">
     <h3>{{ labelInfo }}</h3>
     <form v-on:submit.prevent="onSubmit">
-      <input v-model="inputValue" type="text" :placeholder="inputPlaceholder" />
+      <input v-model="inputValue" :type="inputType" :placeholder="inputPlaceholder" />
       <button type="submit">Suivant</button>
     </form>
   </div>
@@ -29,6 +29,10 @@ export default {
     },
     fieldName: {
       required: true,
+      type: String
+    },
+    inputType: {
+      require: true,
       type: String
     }
   },

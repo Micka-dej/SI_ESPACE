@@ -56,6 +56,7 @@ class UserController extends Controller
      */
     public function login(APIService $APIService, Request $request)
     {
+        
         return $APIService->successWithResults('Authentication succeed', 200, 'auth', $request);
     }
 }
