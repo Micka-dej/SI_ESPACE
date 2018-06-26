@@ -1,6 +1,6 @@
 <template>
   <div class="register-page">
-    <register-form @stepData="processStepData" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
+    <register-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
           title: "Choissisez un nom d'utilisateur :",
           fname: "username",
           ftype: "text",
+          defaultValue: "",
           nextStep: "email"
         },
         email: {
@@ -37,6 +38,7 @@ export default {
           title: "Veuillez entrer une adresse e-mail :",
           fname: "email",
           ftype: "email",
+          defaultValue: "",
           nextStep: "plainPassword"
         },
         plainPassword: {
@@ -44,6 +46,7 @@ export default {
           title: "Veuillez choisir un mot de passe :",
           fname: "plainPassword",
           ftype: "password",
+          defaultValue: "",
           nextStep: "lastName"
         },
         lastName: {
@@ -51,6 +54,7 @@ export default {
           title: "Veuillez renseigner votre nom :",
           fname: "lastName",
           ftype: "text",
+          defaultValue: "",
           nextStep: "firstName"
         },
         firstName: {
@@ -58,6 +62,7 @@ export default {
           title: "Veuillez renseigner votre prénom :",
           fname: "firstName",
           ftype: "text",
+          defaultValue: "",
           nextStep: "phoneNumber"
         },
         phoneNumber: {
@@ -65,6 +70,7 @@ export default {
           title: "Veuillez renseigner un numéro de téléphone :",
           fname: "phoneNumber",
           ftype: "text",
+          defaultValue: "",
           nextStep: "planet"
         },
         planet: {
@@ -72,6 +78,7 @@ export default {
           title: "De quelle planète êtes-vous originaire ?",
           fname: "planet",
           ftype: "text",
+          defaultValue: "",
           nextStep: "credits"
         },
         credits: {
@@ -79,6 +86,7 @@ export default {
           title: "De combien souhaitez-vous créditer votre compte ?",
           fname: "credits",
           ftype: "number",
+          defaultValue: "0",
           nextStep: ""
         }
       }
@@ -86,22 +94,24 @@ export default {
   },
   created() {
     this.actualStep = this.stepsData.username;
+    DataStore.validationErrors = [];
   },
   methods: {
     handleRegistrationSubmit() {
+      console.log(DataStore.userDetails);
       api
         .post("/user", DataStore.userDetails)
         .then(response => {
-          if (201 !== response.status) {
-            console.debug(response.data);
-          } else {
-            console.error(response.data);
-          }
+          router.push("/confirmation");
         })
         .catch(error => {
-          console.error(error);
+          DataStore.validationErrors = Object.values(
+            error.response.data["additional-informations"][
+              "fields-validation-violations"
+            ]
+          );
+          console.log(DataStore.validationErrors);
         });
-      //router.push("/confirmation");
     },
     processStepData(object) {
       if ("" === this.actualStep.nextStep) {
