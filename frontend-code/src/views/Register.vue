@@ -1,7 +1,14 @@
 <template>
   <div class="register-page">
-    <register-background />
-    <register-form @stepData="processStepData" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
+    <div class="register-background">
+      <div class="register-background__image"></div>
+      <div class="register-background__wave-container">
+        <div class="register-background__wave-container--wave register-background__wave-container--wave-one"></div>
+        <div class="register-background__wave-container--wave register-background__wave-container--wave-two"></div>
+        <div class="register-background__wave-container--wave register-background__wave-container--wave-three"></div>
+      </div>
+    </div>
+    <register-form @confirmAccount="redirectToConfirmation" @stepData="processStepData" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname" :next-step="actualStep.nextStep"/>
   </div>
 </template>
 
@@ -9,7 +16,6 @@
 import axios from "axios";
 
 import router from "../router/index.js";
-import RegisterBackground from "@Component/Register/Background.vue";
 import RegisterForm from "@Component/Register/Form.vue";
 import RegisterSteps from "@Component/Register/Steps.vue";
 import DataStore from "../datastore/index.js";
@@ -19,7 +25,6 @@ import "@ViewStyle/Register.scss";
 export default {
   name: "Register",
   components: {
-    RegisterBackground,
     RegisterForm,
     RegisterSteps
   },
@@ -86,6 +91,9 @@ export default {
   methods: {
     redirectToRegister() {
       router.push("/register");
+    },
+    redirectToConfirmation: function() {
+      router.push("confirmation");
     },
     processStepData(object) {
       this.actualStep = this.stepsData[this.actualStep.nextStep];

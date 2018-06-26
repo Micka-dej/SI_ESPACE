@@ -30,12 +30,22 @@ export default {
     fieldName: {
       required: true,
       type: String
+    },
+    nextStep: {
+      required: true,
+      type: String
     }
   },
   methods: {
     onSubmit() {
-      this.$emit("stepData", { type: this.fieldName, input: this.inputValue });
-      this.inputValue = "";
+      console.log(this.nextStep)
+      if (this.nextStep === '') {
+        console.log("redirection");
+        this.$emit("confirmAccount");
+      } else {
+        this.$emit("stepData", { type: this.fieldName, input: this.inputValue });
+        this.inputValue = "";
+      }
     }
   }
 };
