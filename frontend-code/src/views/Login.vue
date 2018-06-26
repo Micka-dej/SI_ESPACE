@@ -2,12 +2,12 @@
   <div class="login-page">
     <helperBackground/>
     <div class="login-page-loader" v-if="isLoading"></div>
-    <form v-on:submit.prevent="onSubmit">
-      <input type="text" v-model="form.username" placeholder="Entrez votre nom d'utilisateur">
-      <input type="password" v-model="form.password" placeholder="Entrez votre mot de passe">
-      <button type="submit">Se connecter</button>
+    <form class="form" v-on:submit.prevent="onSubmit">
+      <input class="form__username-input" type="text" v-model="form.username" placeholder="Entrez votre nom d'utilisateur">
+      <input class="form__password-input" type="password" v-model="form.password" placeholder="Entrez votre mot de passe">
+      <button class="form__button" type="submit">Connexion</button>
     </form>
-    <a v-on:click="redirectToRegister">Créer un compte utilisateur</a>
+    <a class="link" v-on:click="redirectToRegister">Créer un compte utilisateur</a>
   </div>
 </template>
 

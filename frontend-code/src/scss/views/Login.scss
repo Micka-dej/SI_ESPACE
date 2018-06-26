@@ -1,11 +1,69 @@
 @import '../global/master';
 
 .login-page {
+  text-align: center;
+
   .login-page-loader {
     background-color: rgba($color: #000000, $alpha: .07);
     height: 100vh;
     left: 0;
     top: 0;
     width: 100vw;
+  }
+
+  .form {
+    margin-top: -30px;
+    text-align: center;
+
+    &__username-input,
+    &__password-input {
+      background-color: $very-light-grey;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      height: 25px;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      width: 60%;
+    }
+
+    &__button {
+      background-color: $secondary-color;
+      border-radius: 60px;
+      color: $white;
+      display: block;
+      font-size: 1.2rem;
+      height: 28px;
+      margin: 10px auto 60px;
+      transition: all .3s linear;
+      width: 40%;
+
+      &:hover {
+        background-color: $white;
+        border: 1px $secondary-color solid;
+        color: $secondary-color;
+        transition: all .3s linear;
+      }
+
+      &:active {
+        background-color: $white;
+        border: 1px $secondary-color solid;
+        color: $secondary-color;
+      }
+    }
+  }
+
+  .link {
+    color: $primary-color;
+    font-size: 1.2rem;
+    transition: color .3s linear;
+
+    &:hover {
+      color: $secondary-color;
+      transition: color .3s linear;
+    }
+
+    &:active {
+      color: $secondary-color;
+    }
   }
 }
