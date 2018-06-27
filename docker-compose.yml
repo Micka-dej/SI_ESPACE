@@ -25,13 +25,15 @@ services:
     nginx:
         build: ./nginx
         ports:
-            - "12000:80"
+            - "12000:81"
+            - "12001:80"
         links:
             - php
         volumes_from:
             - php
         volumes:
             - ./logs/nginx/:/var/log/nginx
+            - ./frontend-code/dist:/var/www/vue
     elk:
         image: willdurand/elk
         ports:
