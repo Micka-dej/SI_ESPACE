@@ -1,10 +1,6 @@
 <template>
   <div class="dashboard-page">
-    <div class="background-image"></div>
-    <div class="profile-picture">
-      <img class="profile-picture__img" src="" alt="">
-    </div>
-    <div class="waves"></div>
+    <staticBackground />
     <p class="username"> {{ userDatas.username }} </p>
     <ul class="list-container">
       <li class="list-container__item" v-on:click="redirectToUserInfos" >
@@ -29,9 +25,13 @@ import router from "../router/index.js";
 
 import "@ViewStyle/Dashboard.scss";
 
+import StaticBackground from "@Component/Helper/StaticBackground.vue";
+
 export default {
   name: "Dashboard",
-  components: {},
+  components: {
+    StaticBackground,
+  },
   computed: {
     userDatas() {
       return this.$store.getters.userDetails;

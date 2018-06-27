@@ -1,6 +1,6 @@
 <template>
   <div class="register-page">
-    <helperBackground/>
+    <helperBackground :imgSrc="img" />
     <register-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
@@ -13,6 +13,7 @@ import RegisterForm from "@Component/Register/Form.vue";
 import RegisterSteps from "@Component/Register/Steps.vue";
 import HelperBackground from "@Component/Helper/Background.vue";
 
+import myBg from "../img/boutique.jpg";
 import "@ViewStyle/Register.scss";
 import api from "../APIHelper.js";
 
@@ -25,6 +26,7 @@ export default {
   },
   data() {
     return {
+      img: myBg,
       actualStep: {},
       stepsData: {
         username: {
