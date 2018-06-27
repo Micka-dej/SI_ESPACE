@@ -1,6 +1,6 @@
 <template>
   <div class="register-page">
-    <helperBackground/>
+    <helperBackground :imgSrc="img" />
     <register-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
   </div>
 </template>
