@@ -1,14 +1,13 @@
 {
-  "name": "vue-webpack-4",
+  "name": "space-iw",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "author": "David Venin",
+  "author": "Chrystelle Poulet & Quentin Raimbault",
   "scripts": {
-    "start": "npm run serve:dev",
+    "start": "cross-env NODE_ENV=development node bin/dev-server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "serve:dev": "cross-env NODE_ENV=development node bin/dev-server.js",
-    "serve:production": "cross-env NODE_ENV=production node bin/spa-server.js"
+    "serve": "cross-env NODE_ENV=production node bin/spa-server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",
