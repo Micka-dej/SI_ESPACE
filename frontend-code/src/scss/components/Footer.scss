@@ -1,0 +1,38 @@
+@import '../global/master';
+
+.footer {
+  bottom: 0;
+  position: absolute;
+  width: 100vw;
+
+  .top-line {
+    border-top: 1px $primary-color solid;
+    height: 1px;
+    margin: 0 auto 2vh;
+    width: 90vw;
+  }
+
+  .icons-container {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: auto;
+    width: 50%;
+
+    &__item {
+      width: 20%;
+    }
+  }
+
+  .links-container {
+    color: $primary-color;
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh auto;
+    width: 50%;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}

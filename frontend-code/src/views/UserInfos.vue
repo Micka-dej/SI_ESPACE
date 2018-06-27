@@ -1,6 +1,13 @@
 <template>
   <div class="userInfos-page">
-    Hello
+    <h3>Mes informations</h3>
+    <ul class="list-container">
+      <li class="list-container__item">
+        <p class="name-field"></p>
+        <p class="user-data"></p>
+      </li>
+    </ul>
+    <Footer />
   </div>
 </template>
 
@@ -8,10 +15,13 @@
 import router from "../router/index.js";
 
 //import "@ViewStyle/UserInfos.scss";
+import Footer from "@Component/Helper/Footer.vue";
 
 export default {
   name: "UserInfos",
-  components: {},
+  components: {
+    Footer
+  },
   data() {
     return {
       userDatas: {
