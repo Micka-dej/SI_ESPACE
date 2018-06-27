@@ -33,7 +33,8 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: ["vue-style-loader", "css-loader", "sass-loader"]
+        loader:
+          "vue-style-loader!css-loader!resolve-url-loader!sass-loader?sourceMap"
       },
       {
         test: /\.(png|jp(e*)g|svg)$/,
@@ -48,12 +49,15 @@ const config = {
         ]
       },
       {
-        test: /\.ttf$/,
-        loader: "url-loader",
-        options: {
-          limit: 100000, // Convert images < 8kb to base64 strings
-          name: "fonts/[hash]-[name].[ext]"
-        }
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "fonts/[name].[ext]"
+            }
+          }
+        ]
       }
     ]
   },
