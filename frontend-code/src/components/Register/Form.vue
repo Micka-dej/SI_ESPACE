@@ -2,7 +2,7 @@
   <div class="register-form">
     <h3 class="register-form__title">{{ labelInfo }}</h3>
     <form class="register-form__form" v-on:submit.prevent="onSubmit">
-      <input class="register-form__input" v-model="inputValue" :type="inputType" :placeholder="inputPlaceholder" />
+      <input class="register-form__input" v-model="inputValue" :type="inputType" :placeholder="inputPlaceholder" required />
       <button class="register-form__button" type="submit">Suivant</button>
     </form>
   </div>
