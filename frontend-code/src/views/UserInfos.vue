@@ -24,6 +24,11 @@ export default {
         username: "Stell04"
       }
     };
+  },
+  beforeMount() {
+    if (true !== this.$store.getters.isLoggedIn) {
+      router.push("/login");
+    }
   }
 };
 </script>

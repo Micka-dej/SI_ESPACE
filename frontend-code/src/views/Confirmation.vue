@@ -16,18 +16,15 @@ export default {
   components: {
     HelperModal
   },
-  data() {
-    return {
-      errors: []
-    };
+  computed: {
+    errors() {
+      return this.$store.getters.validationErrors;
+    }
   },
   methods: {
     redirectToConfirmation() {
       router.push("/confirmation");
     }
-  },
-  created() {
-    this.errors = this.$store.getters.validationErrors;
   }
 };
 </script>

@@ -32,10 +32,10 @@ import "@ViewStyle/Dashboard.scss";
 export default {
   name: "Dashboard",
   components: {},
-  data() {
-    return {
-      userDatas: this.$store.getters.userDetails
-    };
+  computed: {
+    userDatas() {
+      return this.$store.getters.userDetails;
+    }
   },
   methods: {
     redirectToUserInfos: function() {
