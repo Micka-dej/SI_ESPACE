@@ -21,6 +21,7 @@ done
 echo "[INFO] MYSQL STARTED"
 
 /var/www/symfony/bin/console doctrine:schema:create
+/var/www/symfony/bin/console doctrine:fixtures:load
 
 echo "[INFO] DOCTRINE OK"
 

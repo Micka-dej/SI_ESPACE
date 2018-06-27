@@ -62,6 +62,11 @@ class SpaceShip
      */
     private $orders;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="spaceShips")
+     */
+    private $relatedUser;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -176,6 +181,18 @@ class SpaceShip
                 $order->setSpaceship(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRelatedUser(): ?User
+    {
+        return $this->relatedUser;
+    }
+
+    public function setRelatedUser(?User $relatedUser): self
+    {
+        $this->relatedUser = $relatedUser;
 
         return $this;
     }

@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use Swagger\Annotations as SWG;
 
 /**
  * @Route("/api", name="api_")
@@ -83,6 +86,17 @@ class UserController extends Controller
      * @param Request     $request     Handled HTTP request
      * @param APIService  $APIService  Base API Service
      * @param UserService $userService User service
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Returns a list of all users",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=User::class))
+     *     )
+     * )
+     * @SWG\Tag(name="User")
+     * @Security(name="cookieAuth")
      *
      * @return JsonResponse
      */

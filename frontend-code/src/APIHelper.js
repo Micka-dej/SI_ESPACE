@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const config = {
-  baseURL: "http://localhost:12000/api",
+  baseURL: "http://localhost:12001/api",
   withCredentials: true,
   crossDomain: true,
   contentType: false,

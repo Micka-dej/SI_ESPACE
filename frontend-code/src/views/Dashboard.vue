@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    redirectToUserInfos: function() {
+    redirectToUserInfos() {
       router.push("/userInfos");
     }
   },

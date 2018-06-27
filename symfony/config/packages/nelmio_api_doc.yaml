@@ -1,0 +1,19 @@
+nelmio_api_doc:
+    models: { use_jms: false }
+    documentation:
+        info:
+            title: SpacePort API
+            description: School project at HETIC - Rent services from a spaceport
+            version: 0.6.2
+            schemes: [http]
+            host: localhost:12001
+        securityDefinitions:
+            cookieAuth:
+              type: apiKey
+              in: cookie
+              name: PHPSESSID
+        security:
+            - cookieAuth: []
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

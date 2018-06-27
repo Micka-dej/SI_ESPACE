@@ -159,6 +159,11 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SpaceShip", mappedBy="relatedUser")
+     */
+    private $spaceShips;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -166,6 +171,7 @@ class User implements UserInterface, \Serializable
         $this->ordersBill = new ArrayCollection();
         $this->isActive = true;
         $this->creationTime = new \DateTime();
+        $this->spaceShips = new ArrayCollection();
     }
 
     /**
@@ -435,7 +441,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getRoles(): array
     {
@@ -461,7 +467,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return null|bool
      */
     public function isActive(): ?bool
     {
@@ -516,6 +522,37 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SpaceShip[]
+     */
+    public function getSpaceShips(): Collection
+    {
+        return $this->spaceShips;
+    }
+
+    public function addSpaceShip(SpaceShip $spaceShip): self
+    {
+        if (!$this->spaceShips->contains($spaceShip)) {
+            $this->spaceShips[] = $spaceShip;
+            $spaceShip->setRelatedUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpaceShip(SpaceShip $spaceShip): self
+    {
+        if ($this->spaceShips->contains($spaceShip)) {
+            $this->spaceShips->removeElement($spaceShip);
+            // set the owning side to null (unless already changed)
+            if ($spaceShip->getRelatedUser() === $this) {
+                $spaceShip->setRelatedUser(null);
+            }
+        }
 
         return $this;
     }

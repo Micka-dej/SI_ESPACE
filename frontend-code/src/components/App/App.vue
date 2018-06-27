@@ -53,6 +53,10 @@ export default {
           this.$store.commit("setUserDetails", {});
           this.updateLocalStorage();
         });
+    } else {
+      this.$store.commit("setIsLoggedIn", false);
+      this.$store.commit("setUserDetails", {});
+      this.updateLocalStorage();
     }
   }
 };
