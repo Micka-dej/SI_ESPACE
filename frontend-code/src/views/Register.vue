@@ -13,7 +13,7 @@ import RegisterForm from "@Component/Register/Form.vue";
 import RegisterSteps from "@Component/Register/Steps.vue";
 import HelperBackground from "@Component/Helper/Background.vue";
 
-import myBg from "../img/boutique.jpg";
+//import myBg from "../img/boutique.jpg";
 import "@ViewStyle/Register.scss";
 import api from "../APIHelper.js";
 
@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      img: myBg,
+      //img: myBg,
       actualStep: {},
       stepsData: {
         username: {

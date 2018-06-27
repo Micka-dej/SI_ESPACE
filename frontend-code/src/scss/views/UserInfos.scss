@@ -4,18 +4,29 @@
 .user-infos-page {
 
   .header-container {
-    margin-top: -40px;
+    align-items: center;
+    display: flex;
+    margin: -40px auto 0;
+    width: 85vw;
 
     &__back-arrow {
+      align-items: center;
       background: $primary-color;
       border-radius: 50%;
-      height: 30px;
-      width: 30px;
+      display: flex;
+      height: 12vw;
+      justify-content: center;
+      width: 12vw;
+
+      .svg {
+        width: 60%;
+      }
     }
 
     &__title {
       color: $secondary-color;
       font-size: 1.4rem;
+      padding-left: 15%;
       text-align: center;
     }
   }
