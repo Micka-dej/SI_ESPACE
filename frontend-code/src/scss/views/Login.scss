@@ -5,13 +5,35 @@
 
   .login-page-loader {
     background-color: $primary-color;
-    bottom: 0;
+    height: 100vh;
     left: 0;
     opacity: .8;
-    overflow: hidden;
     position: absolute;
-    right: 0;
     top: 0;
+    width: 100vw;
+
+    .logo-container {
+      align-items: center;
+      animation: rotating 3s linear infinite;
+      display: flex;
+      height: 100vh;
+      margin: auto;
+      width: 40vw;
+
+      &__img-logo {
+        width: 100%;
+      }
+
+      @keyframes rotating {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
   }
 
   .form {

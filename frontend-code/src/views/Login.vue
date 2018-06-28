@@ -2,7 +2,8 @@
   <div class="login-page">
     <helperBackground/>
     <div class="login-page-loader" v-if="isLoading">
-      <div class="img-container">
+      <div class="logo-container">
+        <img class="logo-container__img-logo" :src="logoImage" alt="alpha logo">
       </div>
     </div>
     <form class="form" v-on:submit.prevent="onSubmit">
@@ -19,6 +20,7 @@ import api from "../APIHelper.js";
 
 import router from "../router/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
+import logoImage from "../img/logo.png";
 
 import "@ViewStyle/Login.scss";
 
