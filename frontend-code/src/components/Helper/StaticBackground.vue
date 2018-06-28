@@ -5,7 +5,6 @@
       <img class="profile-picture__img" src="" alt="">
     </div>
     <div class="waves"></div>
-    </div>
   </div>
 </template>
 

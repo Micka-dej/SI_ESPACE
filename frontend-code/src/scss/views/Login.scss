@@ -4,11 +4,14 @@
   text-align: center;
 
   .login-page-loader {
-    background-color: rgba($color: #000000, $alpha: .07);
-    height: 100vh;
+    background-color: $primary-color;
+    bottom: 0;
     left: 0;
+    opacity: .8;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
     top: 0;
-    width: 100vw;
   }
 
   .form {

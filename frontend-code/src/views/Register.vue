@@ -2,6 +2,7 @@
   <div class="register-page">
     <helperBackground :imgSrc="img" />
     <register-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname"/>
+    <register-steps :steps="stepsData"/>
   </div>
 </template>
 
@@ -33,7 +34,8 @@ export default {
           fname: "username",
           ftype: "text",
           defaultValue: "",
-          nextStep: "email"
+          nextStep: "email",
+          isDone: true,
         },
         email: {
           placeholder: "Entrez votre e-mail",
@@ -41,7 +43,8 @@ export default {
           fname: "email",
           ftype: "email",
           defaultValue: "",
-          nextStep: "plainPassword"
+          nextStep: "plainPassword",
+          isDone: false,
         },
         plainPassword: {
           placeholder: "Votre mot de passe",
@@ -49,7 +52,8 @@ export default {
           fname: "plainPassword",
           ftype: "password",
           defaultValue: "",
-          nextStep: "lastName"
+          nextStep: "lastName",
+          isDone: false,
         },
         lastName: {
           placeholder: "Entrez votre nom",
@@ -57,7 +61,8 @@ export default {
           fname: "lastName",
           ftype: "text",
           defaultValue: "",
-          nextStep: "firstName"
+          nextStep: "firstName",
+          isDone: false,
         },
         firstName: {
           placeholder: "Entrez votre prénom",
@@ -65,7 +70,8 @@ export default {
           fname: "firstName",
           ftype: "text",
           defaultValue: "",
-          nextStep: "phoneNumber"
+          nextStep: "phoneNumber",
+          isDone: false,
         },
         phoneNumber: {
           placeholder: "Entrez votre numéro",
@@ -73,7 +79,8 @@ export default {
           fname: "phoneNumber",
           ftype: "text",
           defaultValue: "",
-          nextStep: "planet"
+          nextStep: "planet",
+          isDone: false,
         },
         planet: {
           placeholder: "Entrez le nom de votre planète",
@@ -81,7 +88,8 @@ export default {
           fname: "planet",
           ftype: "text",
           defaultValue: "",
-          nextStep: "credits"
+          nextStep: "credits",
+          isDone: false,
         },
         credits: {
           placeholder: "Entrez le montant de vos crédits",
@@ -89,7 +97,8 @@ export default {
           fname: "credits",
           ftype: "number",
           defaultValue: "0",
-          nextStep: ""
+          nextStep: "",
+          isDone: false,
         }
       }
     };
@@ -132,6 +141,7 @@ export default {
           this.$store.getters.registrationDetails[this.actualStep.nextStep] ||
           this.stepsData[this.actualStep.nextStep].defaultValue;
         this.actualStep = this.stepsData[this.actualStep.nextStep];
+        this.actualStep.isDone = true;
       }
 
       this.$store.commit("addRegistrationDetails", [object.type, object.input]);

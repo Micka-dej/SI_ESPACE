@@ -1,7 +1,10 @@
 <template>
   <div class="login-page">
     <helperBackground/>
-    <div class="login-page-loader" v-if="isLoading"></div>
+    <div class="login-page-loader" v-if="isLoading">
+      <div class="img-container">
+      </div>
+    </div>
     <form class="form" v-on:submit.prevent="onSubmit">
       <input class="form__username-input" type="text" v-model="form.username" placeholder="Entrez votre nom d'utilisateur">
       <input class="form__password-input" type="password" v-model="form.password" placeholder="Entrez votre mot de passe">
