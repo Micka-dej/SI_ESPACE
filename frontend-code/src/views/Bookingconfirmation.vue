@@ -14,7 +14,6 @@ import axios from "axios";
 import router from "../router/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
 
-import "@ViewStyle/Booking.scss";
 import api from "../APIHelper.js";
 
 import imageBg from "../img/alpha.png";
@@ -27,8 +26,7 @@ export default {
   data() {
     return {
       img: imageBg
-    }
+    };
   }
 };
-
 </script>

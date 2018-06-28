@@ -23,8 +23,6 @@ import HelperBackground from "@Component/Helper/Background.vue";
 
 import image from "../img/logo.png";
 
-import image from "../img/logo.png";
-
 import "@ViewStyle/Login.scss";
 
 export default {
@@ -46,7 +44,7 @@ export default {
     redirectToRegister() {
       router.push("/register");
     },
-    redirectToBooking: function() {
+    redirectToBooking() {
       router.push("/booking");
     },
     updateLocalStorage() {

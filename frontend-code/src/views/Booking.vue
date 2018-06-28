@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      selected:'A',
+      selected: "A",
       actualStep: {},
       img: imageBg,
       stepsData: {
@@ -33,16 +33,16 @@ export default {
           select: true,
           add: true,
           options: [
-            { text: 'AK30-2K7-X4B3', value: 'A' },
-            { text: 'AK31-2K7-X4B3', value: 'B' },
-            { text: 'AK32-2K7-X4B3', value: 'C' }
+            { text: "AK30-2K7-X4B3", value: "A" },
+            { text: "AK31-2K7-X4B3", value: "B" },
+            { text: "AK32-2K7-X4B3", value: "C" }
           ],
           title: "Pour quel vaisseau souhaitez-vous réserver une place ? ",
           fname: "name",
           ftype: "hidden",
           defaultValue: "",
           placeholder: "",
-          nextStep: "date",
+          nextStep: "date"
         },
         date: {
           select: false,
@@ -84,7 +84,7 @@ export default {
     this.actualStep = this.stepsData.name;
   },
   methods: {
-    redirectToBookingAdd: function() {
+    redirectToBookingAdd() {
       router.push("/bookingadd");
     },
     processStepData(object) {

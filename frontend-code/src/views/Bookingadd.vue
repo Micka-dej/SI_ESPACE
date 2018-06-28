@@ -13,9 +13,9 @@ import BookingForm from "@Component/Booking/Form.vue";
 import BookingSteps from "@Component/Booking/Steps.vue";
 import HelperBackground from "@Component/Helper/Background.vue";
 
-
-import "@ViewStyle/Booking.scss";
 import api from "../APIHelper.js";
+
+import imageBg from "../img/alpha.png";
 
 export default {
   name: "Bookingadd",
@@ -26,8 +26,9 @@ export default {
   },
   data() {
     return {
-      selected:'A',
+      selected: "A",
       actualStep: {},
+      img: imageBg,
       stepsData: {
         new: {
           select: false,
@@ -42,23 +43,21 @@ export default {
         energy: {
           select: true,
           options: [
-            { text: 'Iridium', value: 'A' },
-            { text: 'Solaire', value: 'B' },
-            { text: 'Plutonium', value: 'C' }
+            { text: "Iridium", value: "A" },
+            { text: "Solaire", value: "B" },
+            { text: "Plutonium", value: "C" }
           ],
           title: "Avec quelle énergie fonctionne votre vaisseau ? ",
           fname: "energy",
           ftype: "hidden",
           defaultValue: "",
           placeholder: "",
-          nextStep: "",
+          nextStep: ""
         }
-
       }
     };
   },
   created() {
-
     this.actualStep = this.stepsData.new;
   },
   methods: {
@@ -67,7 +66,6 @@ export default {
         router.push("/booking");
       } else {
         this.actualStep = this.stepsData[this.actualStep.nextStep];
-
       }
     }
   }

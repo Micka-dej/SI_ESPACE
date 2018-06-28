@@ -3,7 +3,7 @@
     <h3 class="booking-form__title">{{ labelInfo }}</h3>
     <form class="booking-form__form" v-on:submit.prevent="onSubmit">
       <select class="booking-form__select" v-if="select" v-model="selected">
-        <option v-for="option in options" v-bind:value="option.value">
+        <option v-for="(option, index) in options" :key="index" :value="option.value">
           {{ option.text }}
         </option>
       </select>
@@ -20,7 +20,7 @@ export default {
   name: "BookingForm",
   data() {
     return {
-      selected: 'A',
+      selected: "A",
       inputValue: this.defaultValue
     };
   },
