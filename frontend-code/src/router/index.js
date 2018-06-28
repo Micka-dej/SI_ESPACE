@@ -13,6 +13,7 @@ import BookingAdd from "../views/Bookingadd.vue";
 import Hotel from '../views/Hotel.vue';
 import Activity from '../views/Activity.vue';
 import Restauration from '../views/Restauration.vue';
+import Vehicle from '../views/Vehicle.vue';
 
 Vue.use(Router);
 
@@ -104,6 +105,14 @@ const router = new Router({
       component: BookingConfirmation,
       meta: {
         title: "Confirmation réservation"
+      }
+    },
+    {
+      path: "/vehicle",
+      name: "vehicle",
+      component: vehicle,
+      meta: {
+        title: "vehicle"
       }
     },
     {

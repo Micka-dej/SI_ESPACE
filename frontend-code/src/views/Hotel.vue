@@ -1,6 +1,6 @@
 <template>
     <div class="hotelPage">
-      <helperBackground/>
+      <helperBackground :imgSrc="img"/>
       <h2 class="hotelPage-title">Reposez vous</h2>
       <!-- <helperCategorie/> -->
     <div class="hotelPage-container">
@@ -25,7 +25,9 @@ import image2 from "../img/Hotel/JANERA.jpg";
 import image3 from "../img/Hotel/Ahbahcsur.jpg";
 import image4 from "../img/Hotel/starlord.jpg";
 
-import "@ViewStyle/Hotelpage.scss";
+import "@ViewStyle/Article.scss";
+
+import imageBg from "../img/Hotel/JANERA.jpg";
 
 export default {
   name: "Hotel",
@@ -36,6 +38,7 @@ export default {
   },
   data() {
     return {
+      img: imageBg,
       hotels: {
         hotel1: {
           img: image1,

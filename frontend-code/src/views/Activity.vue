@@ -1,6 +1,6 @@
 <template>
     <div class="hotelPage">
-      <helperBackground/>
+      <helperBackground :imgSrc="img"/>
       <!-- <helperCategorie/> -->
     <div class="hotelPage-container">
         <HotelArticle v-for="(hotel, index) in hotels" v-bind:hotel="hotel" :key="index"/>
@@ -24,10 +24,12 @@ import surf from "../img/Activite/Surf.jpg";
 import ski from "../img/Activite/Ski.jpg";
 import Maxdefault from "../img/Activite/Maxdefault.jpg";
 
-import "@ViewStyle/Hotelpage.scss";
+import "@ViewStyle/Article.scss";
+
+import imageBg from "../img/Activite/Surf.jpg";
 
 export default {
-  name: "Hotel",
+  name: "Activity",
   components: {
     HelperBackground,
     // HelperCategory,
@@ -35,6 +37,7 @@ export default {
   },
   data() {
     return {
+      img: imageBg,
       hotels: {
         hotel1: {
           img: nightclub,
