@@ -1,7 +1,12 @@
 @import '../global/master';
 
 .footer {
-  width: 100vw;
+  display: none;
+
+  @include for-size (desktop) {
+    display: block;
+    width: 100vw;
+  }
 
   .top-line {
     border-top: 1px $primary-color solid;
