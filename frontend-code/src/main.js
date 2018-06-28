@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VueCookie from "vue-cookie";
+import VueGrid from '@liqueflies/vue-flex-grid';
 
 import router from "./router";
 import App from "./components/App/App.vue";
@@ -10,6 +11,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuex);
 Vue.use(VueCookie);
+Vue.use(VueGrid);
 
 const store = new Vuex.Store(VuexStoreConfig);
 

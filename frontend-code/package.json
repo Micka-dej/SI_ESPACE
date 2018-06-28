@@ -42,6 +42,7 @@
     "webpack-serve": "^0.3.2"
   },
   "dependencies": {
+    "@liqueflies/vue-flex-grid": "0.0.1",
     "axios": "^0.18.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

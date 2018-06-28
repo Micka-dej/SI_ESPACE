@@ -7,6 +7,7 @@ import Register from "@View/Register.vue";
 import Confirmation from "@View/Confirmation.vue";
 import Dashboard from "@View/Dashboard.vue";
 import UserInfos from "@View/UserInfos.vue";
+import Hotel from '../views/Hotel.vue';
 
 Vue.use(Router);
 
@@ -42,6 +43,14 @@ const router = new Router({
       component: Confirmation,
       meta: {
         title: "Confirmation de compte"
+      }
+    },
+    {
+      path: "/hotel",
+      name: "Hotel",
+      component: Hotel,
+      meta: {
+        title: "Hotel"
       }
     },
     {
