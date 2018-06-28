@@ -16,7 +16,7 @@
         <p class="icon-title">Mes factures</p>
       </li>
     </ul>
-    <button class="button">Déconnexion</button>
+    <button v-on:click="logout" class="button">Déconnexion</button>
   </div>
 </template>
 
@@ -26,6 +26,7 @@ import router from "../router/index.js";
 import "@ViewStyle/Dashboard.scss";
 
 import StaticBackground from "@Component/Helper/StaticBackground.vue";
+import api from "../APIHelper.js";
 
 export default {
   name: "Dashboard",
@@ -40,6 +41,23 @@ export default {
   methods: {
     redirectToUserInfos() {
       router.push("/userInfos");
+    },
+    updateLocalStorage() {
+      window.localStorage.setItem(
+        "userIsLoggedIn",
+        JSON.stringify(this.$store.getters.isLoggedIn)
+      );
+      window.localStorage.setItem(
+        "userData",
+        JSON.stringify(this.$store.getters.userDetails)
+      );
+    },
+    logout() {
+      this.$store.commit("setIsLoggedIn", false);
+      this.$store.commit("setUserDetails", {});
+      this.updateLocalStorage();
+      this.$cookie.delete("PHPSESSID");
+      router.push("/");
     }
   },
   beforeMount() {
