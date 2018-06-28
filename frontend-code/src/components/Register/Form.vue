@@ -50,7 +50,7 @@ export default {
     }
   },
   watch: {
-    defaultValue: function() {
+    defaultValue() {
       this.inputValue = this.defaultValue;
     }
   }

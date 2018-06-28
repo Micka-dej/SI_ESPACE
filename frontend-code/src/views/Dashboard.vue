@@ -30,7 +30,7 @@ import StaticBackground from "@Component/Helper/StaticBackground.vue";
 export default {
   name: "Dashboard",
   components: {
-    StaticBackground,
+    StaticBackground
   },
   computed: {
     userDatas() {

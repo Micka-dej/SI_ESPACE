@@ -121,8 +121,8 @@ export default {
           this.redirectToConfirmation();
         });
     },
-    redirectToConfirmation: function() {
-      router.push("confirmation");
+    redirectToConfirmation() {
+      router.push("/confirmation");
     },
     processStepData(object) {
       if ("" === this.actualStep.nextStep) {

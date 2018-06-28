@@ -26,8 +26,8 @@ export default {
     }
   },
   methods: {
-    redirectToRegister: function() {
-      router.push("register");
+    redirectToRegister() {
+      router.push("/register");
     }
   }
 };

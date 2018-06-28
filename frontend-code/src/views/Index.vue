@@ -17,7 +17,7 @@ import "@ViewStyle/Index.scss";
 export default {
   name: "Index",
   components: {
-  HelperBackground
+    HelperBackground
   },
   data() {
     return {
@@ -25,8 +25,8 @@ export default {
     };
   },
   methods: {
-    redirectToLogin: function() {
-      router.push("login");
+    redirectToLogin() {
+      router.push("/login");
     }
   }
 };
