@@ -20,7 +20,7 @@ import api from "../APIHelper.js";
 
 import router from "../router/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
-import logoImage from "../img/logo.png";
+import image from "../img/logo.png";
 
 import "@ViewStyle/Login.scss";
 
@@ -35,6 +35,7 @@ export default {
         username: "",
         password: ""
       },
+      logoImage: image,
       isLoading: false
     };
   },

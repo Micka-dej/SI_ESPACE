@@ -14,6 +14,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.46",
     "@babel/preset-env": "^7.0.0-beta.46",
     "babel-loader": "^8.0.0-beta",
+    "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "eslint": "^5.0.0",
