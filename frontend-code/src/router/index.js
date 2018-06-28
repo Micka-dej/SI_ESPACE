@@ -11,6 +11,7 @@ import Booking from "../views/Booking.vue";
 import BookingConfirmation from "../views/Bookingconfirmation.vue";
 import BookingAdd from "../views/Bookingadd.vue";
 import Hotel from '../views/Hotel.vue';
+import Activity from '../views/Activity.vue';
 
 Vue.use(Router);
 
@@ -73,6 +74,14 @@ const router = new Router({
       }
     },
     {
+        path: "/activity",
+        name: "Activity",
+        component: Activity,
+        meta: {
+          title: "Activités"
+        }
+    },
+    {
       path: "/booking",
       name: "Booking",
       component: Booking,
@@ -95,7 +104,7 @@ const router = new Router({
       meta: {
         title: "Ajout d'un vaisseau"
       }
-    },
+    }
   ]
 });
 
