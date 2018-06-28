@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VueCookie from "vue-cookie";
-import VueGrid from '@liqueflies/vue-flex-grid';
+import VueGrid from "@liqueflies/vue-flex-grid";
 
 import router from "./router";
 import App from "./components/App/App.vue";

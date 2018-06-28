@@ -1,16 +1,50 @@
 @import '../global/master';
 
 .footer {
+<<<<<<< HEAD
+  width: 100vw;
+=======
   display: none;
 
   @include for-size (desktop) {
     display: block;
     width: 100vw;
   }
+>>>>>>> master
 
   .top-line {
     border-top: 1px $primary-color solid;
     height: 1px;
+<<<<<<< HEAD
+    margin: 0 auto 2vh;
+    width: 90vw;
+  }
+
+  .icons-container {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: auto;
+    width: 50%;
+
+    &__item {
+      width: 20%;
+    }
+  }
+
+  .links-container {
+    color: $primary-color;
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh auto;
+    width: 50%;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}
+=======
     margin: 2vh auto 0;
     width: 90vw;
   }
@@ -74,3 +108,4 @@
     }
   }
 }
+>>>>>>> master

@@ -33,8 +33,8 @@ export default {
   data() {
     return {
       logoBleu: logo,
-      mySpace: mySpace
+      mySpace
     };
-  },
+  }
 };
 </script>

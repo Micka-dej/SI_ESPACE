@@ -7,13 +7,15 @@ import Register from "@View/Register.vue";
 import Confirmation from "@View/Confirmation.vue";
 import Dashboard from "@View/Dashboard.vue";
 import UserInfos from "@View/UserInfos.vue";
+
+import Homepage from "@View/Homepage.vue";
 import Booking from "../views/Booking.vue";
 import BookingConfirmation from "../views/Bookingconfirmation.vue";
 import BookingAdd from "../views/Bookingadd.vue";
-import Hotel from '../views/Hotel.vue';
-import Activity from '../views/Activity.vue';
-import Restauration from '../views/Restauration.vue';
-import Vehicle from '../views/Vehicle.vue';
+import Hotel from "../views/Hotel.vue";
+import Activity from "../views/Activity.vue";
+import Restauration from "../views/Restauration.vue";
+import Vehicle from "../views/Vehicle.vue";
 
 Vue.use(Router);
 
@@ -76,12 +78,20 @@ const router = new Router({
       }
     },
     {
+      path: "/homepage",
+      name: "Homepage",
+      component: Homepage,
+      meta: {
+        title: "Page d'accueil"
+      }
+    },
+    {
       path: "/activity",
-        name: "Activity",
-        component: Activity,
-        meta: {
-          title: "Activités"
-        }
+      name: "Activity",
+      component: Activity,
+      meta: {
+        title: "Activités"
+      }
     },
     {
       path: "/restauration",
@@ -109,10 +119,10 @@ const router = new Router({
     },
     {
       path: "/vehicle",
-      name: "vehicle",
-      component: vehicle,
+      name: "Vehicle",
+      component: Vehicle,
       meta: {
-        title: "vehicle"
+        title: "Vehicules"
       }
     },
     {

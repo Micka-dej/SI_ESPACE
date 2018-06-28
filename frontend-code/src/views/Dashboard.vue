@@ -26,12 +26,19 @@ import router from "../router/index.js";
 import "@ViewStyle/Dashboard.scss";
 
 import StaticBackground from "@Component/Helper/StaticBackground.vue";
+<<<<<<< HEAD
+=======
 import api from "../APIHelper.js";
+>>>>>>> master
 
 export default {
   name: "Dashboard",
   components: {
+<<<<<<< HEAD
+    StaticBackground,
+=======
     StaticBackground
+>>>>>>> master
   },
   computed: {
     userDatas() {

@@ -2,7 +2,7 @@
   <div class="home-page">
     <helperBackground/>
     <button class="home-page__button" v-on:click="redirectToLogin">Réserver</button>
-    <router-link class="home-page__link" to="/">Accéder au site</router-link>
+    <router-link class="home-page__link" to="/homepage">Accéder au site</router-link>
   </div>
 </template>
 

@@ -1,0 +1,38 @@
+@import '../global/master';
+
+.category-container {
+  width: 100vw;
+
+
+  &__title  {
+    color: $black;
+    font-family: 'Jura-Bold';
+    font-size: 16px;
+    margin-left: 6rem;
+  }
+
+  &__image {
+    @include for-size (tablet-portrait-up) {
+      height: 80px;
+    }
+    height: 60px;
+    width: 120px;
+  }
+
+
+  &__link {
+    @include for-size (tablet-portrait-up) {
+      margin-top: 80px;
+    }
+    align-items: center;
+    box-shadow: 0 0 5px 2px $box-color;
+    cursor: pointer;
+    display: flex;
+    margin-top: 3rem;
+    text-decoration: none;
+
+    &:hover {
+      border: $primary-color 1px solid;
+    }
+  }
+}

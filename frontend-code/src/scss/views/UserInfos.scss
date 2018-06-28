@@ -4,6 +4,15 @@
 .user-infos-page {
 
   .header-container {
+<<<<<<< HEAD
+    margin-top: -40px;
+
+    &__back-arrow {
+      background: $primary-color;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+=======
     align-items: center;
     display: flex;
     margin: -40px auto 0;
@@ -21,12 +30,16 @@
       .svg {
         width: 60%;
       }
+>>>>>>> master
     }
 
     &__title {
       color: $secondary-color;
       font-size: 1.4rem;
+<<<<<<< HEAD
+=======
       padding-left: 15%;
+>>>>>>> master
       text-align: center;
     }
   }
