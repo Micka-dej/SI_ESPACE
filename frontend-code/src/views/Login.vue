@@ -44,7 +44,7 @@ export default {
     };
   },
   methods: {
-    redirectToRegister: function() {
+    redirectToRegister() {
       router.push("register");
     },
     updateLocalStorage() {
