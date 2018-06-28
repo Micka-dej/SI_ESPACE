@@ -47,6 +47,9 @@
       </li>
     </ul>
     <div class="links-container">
+      <div class="img-cointainer">
+        <img src="" alt="">
+      </div>
       <a class="links-container__item">Plan du site</a>|<a class="links-container__item">Mentions légales</a>
     </div>
   </div>

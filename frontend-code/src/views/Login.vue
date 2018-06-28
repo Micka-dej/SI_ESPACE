@@ -3,7 +3,7 @@
     <helperBackground/>
     <div class="login-page-loader" v-if="isLoading">
       <div class="logo-container">
-        <img class="logo-container__img-logo" :src="logoImage" alt="alpha logo">
+        <img class="logo-container__img-logo" src="../img/logo.png" alt="alpha logo">
       </div>
     </div>
     <form class="form" v-on:submit.prevent="onSubmit">
@@ -12,6 +12,7 @@
       <button class="form__button" type="submit">Connexion</button>
     </form>
     <a class="link" v-on:click="redirectToRegister">Créer un compte utilisateur</a>
+    <Footer/>
   </div>
 </template>
 
@@ -20,14 +21,15 @@ import api from "../APIHelper.js";
 
 import router from "../router/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
-import logoImage from "../img/logo.png";
+import Footer from "@Component/Helper/Footer.vue";
 
 import "@ViewStyle/Login.scss";
 
 export default {
   name: "Login",
   components: {
-    HelperBackground
+    HelperBackground,
+    Footer
   },
   data() {
     return {
@@ -39,8 +41,8 @@ export default {
     };
   },
   methods: {
-    redirectToRegister() {
-      router.push("/register");
+    redirectToRegister: function() {
+      router.push("register");
     },
     updateLocalStorage() {
       window.localStorage.setItem(
