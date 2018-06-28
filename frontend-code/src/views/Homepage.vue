@@ -2,13 +2,9 @@
     <div class="home">
         <Header />
         <HelperBackground :imgSrc="bgImg"/>
-
-      
         <div class="container">
           <h1 class="container__title">Bienvenue, sur Alpha. La station spaciale la plus unique de la galaxie. </h1>
         </div>
-        
-
         <grid>
           <row start="xs">
             <column :xs="12">
@@ -22,7 +18,7 @@
 
 <script>
 import HelperBackground from "@Component/Helper/Background.vue";
-import Category from "@Component/Category/Category.vue";
+import Category from "@Component/Helper/Category.vue";
 import Header from "@Component/Helper/Header.vue";
 import "@ComponentStyle/Category.scss";
 import CarImg from "../img/Car/vehicule.jpg";
@@ -65,6 +61,6 @@ export default {
         }
       ]
     };
-  },
+  }
 };
 </script>

@@ -1,21 +1,16 @@
 @import '../global/master';
 
 .footer {
-<<<<<<< HEAD
-  width: 100vw;
-=======
   display: none;
 
   @include for-size (desktop) {
     display: block;
     width: 100vw;
   }
->>>>>>> master
 
   .top-line {
     border-top: 1px $primary-color solid;
     height: 1px;
-<<<<<<< HEAD
     margin: 0 auto 2vh;
     width: 90vw;
   }
@@ -44,70 +39,3 @@
     }
   }
 }
-=======
-    margin: 2vh auto 0;
-    width: 90vw;
-  }
-
-  .content-container {
-    align-items: center;
-    display: flex;
-    margin: auto;
-    width: 90vw;
-
-    .links-container {
-      color: $primary-color;
-      display: flex;
-      justify-content: space-between;
-      margin: 1vh auto;
-      width: 33.33%;
-
-      .img-container {
-        width: 10%;
-
-        &__logo {
-          width: 100%;
-        }
-      }
-
-      .links {
-        align-items: center;
-        display: flex;
-        font-size: 1.2rem;
-        justify-content: flex-start;
-        width: 85%;
-
-        &__item {
-          &:hover {
-            color: $secondary-color;
-            cursor: pointer;
-          }
-        }
-
-        &__span {
-          padding: 0 2%;
-        }
-      }
-    }
-
-    .rights {
-      color: $primary-color;
-      font-size: 1.1rem;
-      width: 33.33%;
-    }
-
-    .icon-container {
-      text-align: right;
-      width: 33.33%;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &__myspace {
-        width: 10%;
-      }
-    }
-  }
-}
->>>>>>> master

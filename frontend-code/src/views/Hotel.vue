@@ -2,7 +2,7 @@
     <div class="hotelPage">
       <helperBackground :imgSrc="img"/>
       <h2 class="hotelPage-title">Reposez vous</h2>
-      <!-- <helperCategorie/> -->
+      <helperCategory/>
     <div class="hotelPage-container">
         <HotelArticle v-for="(hotel, index) in hotels" v-bind:hotel="hotel" :key="index"/>
     </div>
@@ -18,7 +18,7 @@ import api from "../APIHelper.js";
 
 import router from "../router/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
-// import HelperCategorie from "@Component/Helper/Category.vue";
+import HelperCategory from "@Component/Helper/Category.vue";
 import HotelArticle from "@Component/Hotel/Articles.vue";
 import image1 from "../img/Hotel/azur.jpg";
 import image2 from "../img/Hotel/JANERA.jpg";
@@ -33,7 +33,7 @@ export default {
   name: "Hotel",
   components: {
     HelperBackground,
-    // HelperCategory,
+    HelperCategory,
     HotelArticle
   },
   data() {

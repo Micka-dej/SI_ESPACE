@@ -10,15 +10,15 @@
 <script>
 import "@ComponentStyle/Category.scss";
 export default {
-    name: "Category",
-    props: {
-        item: {
-            type: Object,
-            required: true
-        }
-    },
-    created() {
-        console.log(this.item);
+  name: "Category",
+  props: {
+    item: {
+      type: Object,
+      required: true
     }
+  },
+  created() {
+    console.log(this.item);
+  }
 };
 </script>

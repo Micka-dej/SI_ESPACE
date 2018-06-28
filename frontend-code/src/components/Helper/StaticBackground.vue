@@ -19,7 +19,7 @@ export default {
   name: "StaticBackground",
   data() {
     return {
-      profilePicture: profilePicture
+      profilePicture
     };
   }
 };
