@@ -7,6 +7,9 @@ import Register from "@View/Register.vue";
 import Confirmation from "@View/Confirmation.vue";
 import Dashboard from "@View/Dashboard.vue";
 import UserInfos from "@View/UserInfos.vue";
+import Booking from "../views/Booking.vue";
+import BookingConfirmation from "../views/Bookingconfirmation.vue";
+import BookingAdd from "../views/Bookingadd.vue";
 import Hotel from '../views/Hotel.vue';
 
 Vue.use(Router);
@@ -68,7 +71,31 @@ const router = new Router({
       meta: {
         title: "Informations du compte"
       }
-    }
+    },
+    {
+      path: "/booking",
+      name: "Booking",
+      component: Booking,
+      meta: {
+        title: "Réservation"
+      }
+    },
+    {
+      path: "/bookingconfirmation",
+      name: "BookingConfirmation",
+      component: BookingConfirmation,
+      meta: {
+        title: "Confirmation réservation"
+      }
+    },
+    {
+      path: "/bookingadd",
+      name: "BookingAdd",
+      component: BookingAdd,
+      meta: {
+        title: "Ajout d'un vaisseau"
+      }
+    },
   ]
 });
 

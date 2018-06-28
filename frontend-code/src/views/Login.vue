@@ -9,7 +9,7 @@
     <form class="form" v-on:submit.prevent="onSubmit">
       <input class="form__username-input" type="text" v-model="form.username" placeholder="Entrez votre nom d'utilisateur">
       <input class="form__password-input" type="password" v-model="form.password" placeholder="Entrez votre mot de passe">
-      <button class="form__button" type="submit">Connexion</button>
+      <button v-on:click="redirectToBooking" class="form__button" type="submit">Connexion</button>
     </form>
     <a class="link" v-on:click="redirectToRegister">Créer un compte utilisateur</a>
   </div>
@@ -44,7 +44,10 @@ export default {
   },
   methods: {
     redirectToRegister() {
-      router.push("register");
+      router.push("/register");
+    },
+    redirectToBooking: function() {
+      router.push("/booking");
     },
     updateLocalStorage() {
       window.localStorage.setItem(
