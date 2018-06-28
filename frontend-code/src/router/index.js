@@ -12,6 +12,7 @@ import BookingConfirmation from "../views/Bookingconfirmation.vue";
 import BookingAdd from "../views/Bookingadd.vue";
 import Hotel from '../views/Hotel.vue';
 import Activity from '../views/Activity.vue';
+import Restauration from '../views/Restauration.vue';
 
 Vue.use(Router);
 
@@ -74,12 +75,20 @@ const router = new Router({
       }
     },
     {
-        path: "/activity",
+      path: "/activity",
         name: "Activity",
         component: Activity,
         meta: {
           title: "Activités"
         }
+    },
+    {
+      path: "/restauration",
+      name: "Restauration",
+      component: Restauration,
+      meta: {
+        title: "Restauration"
+      }
     },
     {
       path: "/booking",
