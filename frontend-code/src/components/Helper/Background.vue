@@ -21,9 +21,9 @@ export default {
   data() {
     return {
       imageBg: null
-    }
+    };
   },
-  props : {
+  props: {
     imgSrc: {
       type: String,
       default: defaultImage

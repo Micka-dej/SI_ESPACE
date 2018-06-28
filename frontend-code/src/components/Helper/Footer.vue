@@ -60,6 +60,6 @@ import router from "../../router/index.js";
 import "@ComponentStyle/Footer.scss";
 
 export default {
-  name: "Footer",
+  name: "Footer"
 };
 </script>

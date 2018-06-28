@@ -51,7 +51,7 @@
 import router from "../router/index.js";
 
 import "@ViewStyle/UserInfos.scss";
-import StaticBackground from "@Component/Helper/StaticBackground.vue"
+import StaticBackground from "@Component/Helper/StaticBackground.vue";
 import Footer from "@Component/Helper/Footer.vue";
 
 export default {
