@@ -2,7 +2,7 @@
   <div class="helper-static-background">
     <div class="background-image"></div>
     <div class="profile-picture">
-      <img class="profile-picture__img" src="" alt="">
+      <img class="profile-picture__img" :src="profilePicture" alt="">
     </div>
     <div class="waves"></div>
   </div>
@@ -11,9 +11,16 @@
 <script>
 import router from "../../router/index.js";
 
+import profilePicture from "../../img/logo-bleu.png";
+
 import "@ComponentStyle/HelperStaticBackground.scss";
 
 export default {
-  name: "StaticBackground"
+  name: "StaticBackground",
+  data() {
+    return {
+      profilePicture: profilePicture
+    };
+  }
 };
 </script>
