@@ -17,6 +17,9 @@
 </template>
 
 <script>
+import axios from "axios";
+
+import router from "../router/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
 import Category from "@Component/Helper/Category.vue";
 import Header from "@Component/Helper/Header.vue";
@@ -26,6 +29,8 @@ import HomeImg from "../img/Hotel/HomePicture.jpg";
 import RestoreImg from "../img/Restoration/forumFull.jpg";
 import ActiviteImg from "../img/Activities/maxresdefault.jpg";
 import "@ViewStyle/Homepage.scss";
+
+
 
 export default {
   name: "Homepage",
@@ -40,22 +45,22 @@ export default {
       bgImg: HomeImg,
       services: [
         {
-          url: "/services/vehicules",
+          url: "/vehicle",
           title: "Se véhiculer",
           img: CarImg
         },
         {
-          url: "/services/se-reposer",
+          url: "/hotel",
           title: "Se reposer",
           img: HomeImg
         },
         {
-          url: "/services/se-restaurer",
+          url: "/restauration",
           title: "Se restaurer",
           img: RestoreImg
         },
         {
-          url: "/services/se-divertir",
+          url: "/activity",
           title: "Se divertir",
           img: ActiviteImg
         }
