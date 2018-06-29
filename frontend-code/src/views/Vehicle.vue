@@ -1,7 +1,18 @@
 <template>
     <div class="hotelPage">
+      <Header/>
       <helperBackground :imgSrc="img"/>
-      <!-- <helperCategorie/> -->
+      <grid>
+        <row start="xs">
+          <column :xs="12">
+          <h2 class="hotelPage-title">Explorer Alpha</h2> 
+          </column>
+          <Category v-for="service in services" :item="service" v-bind:key="service.title" />
+          <column :xs="12">
+          <h2 class="hotelPage-title">Véhiculez-vous</h2> 
+          </column>
+        </row>
+      </grid>
     <div class="hotelPage-container">
         <HotelArticle v-for="(hotel, index) in hotels" v-bind:hotel="hotel" :key="index"/>
     </div>
@@ -14,26 +25,35 @@
 
 <script>
 import api from "../APIHelper.js";
-
 import router from "../router/index.js";
+
 import HelperBackground from "@Component/Helper/Background.vue";
-// import HelperCategorie from "@Component/Helper/Category.vue";
 import HotelArticle from "@Component/Hotel/Articles.vue";
+import Category from "@Component/Helper/Category.vue";
+import Header from "@Component/Helper/Header.vue";
+
 import vehicle1 from "../img/vehicle/honda-3r-c-0_1440x655c.jpg";
 import vehicle2 from "../img/vehicle/MotorBike.jpg";
 import vehicle3 from "../img/vehicle/vehicle3.jpg";
 import vehicle4 from "../img/vehicle/vehicle.jpg";
+import CarImg from "../img/Car/vehicule.jpg";
+import HomeImg from "../img/Hotel/HomePicture.jpg";
+import RestoreImg from "../img/Restoration/forumFull.jpg";
+import ActiviteImg from "../img/Activities/maxresdefault.jpg";
+import imageBg from "../img/vehicle/vehicle.jpg";
+
 
 import "@ViewStyle/Article.scss";
+import "@ComponentStyle/Category.scss";
 
-import imageBg from "../img/vehicle/vehicle.jpg";
 
 export default {
   name: "Vehicle",
   components: {
     HelperBackground,
-    // HelperCategory,
-    HotelArticle
+    HotelArticle,
+    Category,
+    Header
   },
   data() {
     return {
@@ -67,7 +87,30 @@ export default {
           description:
             "Pour vous et votre famille. Pour parcourir la station avec classe et discrétion. Ce modèle électrique vous emmènera partout. "
         }
-      }
+      },
+
+      services: [
+        {
+          url: "/vehicle",
+          title: "Se véhiculer",
+          img: CarImg
+        },
+        {
+          url: "/hotel",
+          title: "Se reposer",
+          img: HomeImg
+        },
+        {
+          url: "/restauration",
+          title: "Se restaurer",
+          img: RestoreImg
+        },
+        {
+          url: "/activity",
+          title: "Se divertir",
+          img: ActiviteImg
+        }
+      ]
     };
   }
 };

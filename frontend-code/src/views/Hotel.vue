@@ -1,8 +1,18 @@
 <template>
     <div class="hotelPage">
-      <helperBackground :imgSrc="img"/>
-      <h2 class="hotelPage-title">Reposez vous</h2>
-      <helperCategory/>
+      <Header/>
+      <HelperBackground :imgSrc="img"/>
+      <grid>
+          <row start="xs">
+            <column :xs="12">
+            <h2 class="hotelPage-title">Explorer Alpha</h2> 
+            </column>
+            <Category v-for="service in services" :item="service" v-bind:key="service.title" />
+            <column :xs="12">
+          <h2 class="hotelPage-title">Reposez-vous</h2> 
+          </column>
+          </row>
+        </grid>
     <div class="hotelPage-container">
         <HotelArticle v-for="(hotel, index) in hotels" v-bind:hotel="hotel" :key="index"/>
     </div>
@@ -18,13 +28,20 @@ import api from "../APIHelper.js";
 
 import router from "../router/index.js";
 import HelperBackground from "@Component/Helper/Background.vue";
-import HelperCategory from "@Component/Helper/Category.vue";
 import HotelArticle from "@Component/Hotel/Articles.vue";
+import Category from "@Component/Helper/Category.vue";
+import Header from "@Component/Helper/Header.vue";
+
 import image1 from "../img/Hotel/azur.jpg";
 import image2 from "../img/Hotel/JANERA.jpg";
 import image3 from "../img/Hotel/Ahbahcsur.jpg";
 import image4 from "../img/Hotel/starlord.jpg";
+import CarImg from "../img/Car/vehicule.jpg";
+import HomeImg from "../img/Hotel/HomePicture.jpg";
+import RestoreImg from "../img/Restoration/forumFull.jpg";
+import ActiviteImg from "../img/Activities/maxresdefault.jpg";
 
+import "@ComponentStyle/Category.scss";
 import "@ViewStyle/Article.scss";
 
 import imageBg from "../img/Hotel/JANERA.jpg";
@@ -33,8 +50,9 @@ export default {
   name: "Hotel",
   components: {
     HelperBackground,
-    HelperCategory,
-    HotelArticle
+    HotelArticle,
+    Category,
+    Header
   },
   data() {
     return {
@@ -68,7 +86,30 @@ export default {
           description:
             "Cet hôtel le plus éloigné de la station vous procura le plus grand des calmes. Des chambres spacieuses, un service royal. Venez découvrir le Starlord."
         }
-      }
+      },
+
+      services: [
+        {
+          url: "/vehicle",
+          title: "Se véhiculer",
+          img: CarImg
+        },
+        {
+          url: "/hotel",
+          title: "Se reposer",
+          img: HomeImg
+        },
+        {
+          url: "/restauration",
+          title: "Se restaurer",
+          img: RestoreImg
+        },
+        {
+          url: "/activity",
+          title: "Se divertir",
+          img: ActiviteImg
+        }
+      ]
     };
   }
 };
