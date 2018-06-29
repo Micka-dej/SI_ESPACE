@@ -1,7 +1,7 @@
 <template>
   <div class="booking-page">
     <helperBackground :imgSrc="img" />
-    <booking-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname" :select="actualStep.select" :options="actualStep.options" />
+    <booking-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname" :select="actualStep.select" :options="actualStep.options" :selected="actualStep.selected" />
   </div>
 </template>
 
@@ -26,33 +26,34 @@ export default {
   },
   data() {
     return {
-      selected: "A",
+      spaceshipDetails: {},
       actualStep: {},
       img: imageBg,
       stepsData: {
         new: {
           select: false,
           title: "ID du nouveau vaisseau ?",
-          fname: "new",
+          fname: "matricule",
           ftype: "text",
           defaultValue: "",
-          nextStep: "energy",
-          placeholder: "Entrez l'ID de votre vaisseau",
+          nextStep: "fuelType",
+          placeholder: "AA-123-BB",
           options: []
         },
-        energy: {
+        fuelType: {
           select: true,
           options: [
-            { text: "Iridium", value: "A" },
-            { text: "Solaire", value: "B" },
-            { text: "Plutonium", value: "C" }
+            { text: "Iridium", value: "Iridium" },
+            { text: "Solaire", value: "Solaire" },
+            { text: "Plutonium", value: "Plutonium" }
           ],
           title: "Avec quelle énergie fonctionne votre vaisseau ? ",
-          fname: "energy",
+          fname: "fuelType",
           ftype: "hidden",
           defaultValue: "",
           placeholder: "",
-          nextStep: ""
+          nextStep: "",
+          selected: "Iridium"
         }
       }
     };
@@ -61,12 +62,40 @@ export default {
     this.actualStep = this.stepsData.new;
   },
   methods: {
+    updateLocalStorage() {
+      window.localStorage.setItem(
+        "userIsLoggedIn",
+        JSON.stringify(this.$store.getters.isLoggedIn)
+      );
+      window.localStorage.setItem(
+        "userData",
+        JSON.stringify(this.$store.getters.userDetails)
+      );
+    },
+    handleRegistrationSubmit() {
+      api
+        .post("/spaceship", this.spaceshipDetails)
+        .then(response => {
+          router.push("/booking");
+        })
+        .catch(error => {
+          // @TODO: handle errors instead of doing crap
+          console.error(error.response.data);
+          console.log(this.spaceshipDetails);
+        });
+    },
     processStepData(object) {
+      this.spaceshipDetails[object.type] = object.input;
       if ("" === this.actualStep.nextStep) {
-        router.push("/booking");
+        this.handleRegistrationSubmit();
       } else {
         this.actualStep = this.stepsData[this.actualStep.nextStep];
       }
+    }
+  },
+  beforeMount() {
+    if (true !== this.$store.getters.isLoggedIn) {
+      router.push("/login");
     }
   }
 };

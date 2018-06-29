@@ -2,7 +2,7 @@
   <div class="booking-form">
     <h3 class="booking-form__title">{{ labelInfo }}</h3>
     <form class="booking-form__form" v-on:submit.prevent="onSubmit">
-      <select class="booking-form__select" v-if="select" v-model="selected">
+      <select class="booking-form__select" v-if="select" v-model="selectedData">
         <option v-for="(option, index) in options" :key="index" :value="option.value">
           {{ option.text }}
         </option>
@@ -20,7 +20,7 @@ export default {
   name: "BookingForm",
   data() {
     return {
-      selected: "A",
+      selectedData: this.selected,
       inputValue: this.defaultValue
     };
   },
@@ -52,20 +52,35 @@ export default {
     options: {
       required: false,
       type: Array
+    },
+    selected: {
+      required: false,
+      type: String,
+      default: "A"
     }
   },
   methods: {
     onSubmit() {
-      this.$emit("stepData", {
-        type: this.fieldName,
-        input: this.inputValue
-      });
+      if (this.select) {
+        this.$emit("stepData", {
+          type: this.fieldName,
+          input: this.selectedData
+        });
+      } else {
+        this.$emit("stepData", {
+          type: this.fieldName,
+          input: this.inputValue
+        });
+      }
       this.inputValue = this.defaultValue;
     }
   },
   watch: {
     defaultValue() {
       this.inputValue = this.defaultValue;
+    },
+    selected() {
+      this.selectedData = this.selected;
     }
   }
 };

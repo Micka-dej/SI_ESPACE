@@ -1,7 +1,7 @@
 <template>
   <div class="booking-page">
     <helperBackground :imgSrc="img" />
-    <booking-form @stepData="processStepData" :default-value="actualStep.defaultValue" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname" :select="actualStep.select" :options="actualStep.options" />
+    <booking-form @stepData="processStepData" :default-value="actualStep.defaultValue" :selected="actualStep.selected" :input-type="actualStep.ftype" :input-placeholder="actualStep.placeholder" :label-info="actualStep.title" :field-name="actualStep.fname" :select="actualStep.select" :options="actualStep.options" />
     <p  class="booking-form__link" v-on:click="redirectToBookingAdd" v-if="actualStep.add">Ajouter un vaisseau</p>
   </div>
 </template>
@@ -25,24 +25,21 @@ export default {
   },
   data() {
     return {
-      selected: "A",
       actualStep: {},
       img: imageBg,
+      spaceships: [],
       stepsData: {
         name: {
           select: true,
           add: true,
-          options: [
-            { text: "AK30-2K7-X4B3", value: "A" },
-            { text: "AK31-2K7-X4B3", value: "B" },
-            { text: "AK32-2K7-X4B3", value: "C" }
-          ],
+          options: [],
           title: "Pour quel vaisseau souhaitez-vous réserver une place ? ",
           fname: "name",
           ftype: "hidden",
           defaultValue: "",
           placeholder: "",
-          nextStep: "date"
+          nextStep: "date",
+          selected: ""
         },
         date: {
           select: false,
@@ -80,8 +77,31 @@ export default {
       }
     };
   },
-  created() {
-    this.actualStep = this.stepsData.name;
+  beforeMount() {
+    if (true !== this.$store.getters.isLoggedIn) {
+      router.push("/login");
+      return;
+    }
+    api
+      .get("/spaceship")
+      .then(response => {
+        let spaceShipDatas = [];
+        response.data.results.spaceships.forEach(element => {
+          spaceShipDatas.push({
+            text: element.matricule,
+            value: element.id
+          });
+          this.spaceships.push(element);
+        });
+        this.stepsData.name.options = spaceShipDatas;
+        this.stepsData.name.selected = this.spaceships[0].id.toString();
+        this.actualStep = this.stepsData.name;
+      })
+      .catch(error => {
+        // @TODO: handle errors instead of doing crap
+        console.error(error.response.data);
+        console.log(this.spaceshipDetails);
+      });
   },
   methods: {
     redirectToBookingAdd() {

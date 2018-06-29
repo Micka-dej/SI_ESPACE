@@ -26,6 +26,9 @@ const storeConfig = {
     },
     addRegistrationDetails(state, newDetail) {
       state.registrationDetails[newDetail[0]] = newDetail[1];
+    },
+    setUserSpaceShips(state, spaceships) {
+      state.userDetails.spaceShips = spaceships;
     }
   },
   actions: {}

@@ -37,7 +37,7 @@ export default {
           ftype: "text",
           defaultValue: "",
           nextStep: "email",
-          isDone: true,
+          isDone: true
         },
         email: {
           placeholder: "Entrez votre e-mail",
@@ -46,7 +46,7 @@ export default {
           ftype: "email",
           defaultValue: "",
           nextStep: "plainPassword",
-          isDone: false,
+          isDone: false
         },
         plainPassword: {
           placeholder: "Votre mot de passe",
@@ -55,7 +55,7 @@ export default {
           ftype: "password",
           defaultValue: "",
           nextStep: "lastName",
-          isDone: false,
+          isDone: false
         },
         lastName: {
           placeholder: "Entrez votre nom",
@@ -64,7 +64,7 @@ export default {
           ftype: "text",
           defaultValue: "",
           nextStep: "firstName",
-          isDone: false,
+          isDone: false
         },
         firstName: {
           placeholder: "Entrez votre prénom",
@@ -73,7 +73,7 @@ export default {
           ftype: "text",
           defaultValue: "",
           nextStep: "phoneNumber",
-          isDone: false,
+          isDone: false
         },
         phoneNumber: {
           placeholder: "Entrez votre numéro",
@@ -82,7 +82,7 @@ export default {
           ftype: "text",
           defaultValue: "",
           nextStep: "planet",
-          isDone: false,
+          isDone: false
         },
         planet: {
           placeholder: "Entrez le nom de votre planète",
@@ -91,7 +91,7 @@ export default {
           ftype: "text",
           defaultValue: "",
           nextStep: "credits",
-          isDone: false,
+          isDone: false
         },
         credits: {
           placeholder: "Entrez le montant de vos crédits",
@@ -100,7 +100,7 @@ export default {
           ftype: "number",
           defaultValue: "0",
           nextStep: "",
-          isDone: false,
+          isDone: false
         }
       }
     };
@@ -136,6 +136,8 @@ export default {
       router.push("/confirmation");
     },
     processStepData(object) {
+      this.$store.commit("addRegistrationDetails", [object.type, object.input]);
+      console.log(this.$store.getters.registrationDetails);
       if ("" === this.actualStep.nextStep) {
         this.handleRegistrationSubmit();
       } else {
@@ -145,9 +147,6 @@ export default {
         this.actualStep = this.stepsData[this.actualStep.nextStep];
         this.actualStep.isDone = true;
       }
-
-      this.$store.commit("addRegistrationDetails", [object.type, object.input]);
-      console.log(this.$store.getters.registrationDetails);
     }
   }
 };
