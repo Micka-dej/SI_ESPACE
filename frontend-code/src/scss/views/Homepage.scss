@@ -1,46 +1,76 @@
 @import '../global/master';
 
 .home {
-  .container {
-    @include for-size (large-desktop) {
-      display: block;
-      position: relative;
-    }
-    display: none;
+  &__description {
+    bottom: 0;
+    color: $white;
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+    margin: 2vh 7vw 0;
+    position: absolute;
+    transform: translateY(-460px);
 
-    &__title {
-      @include for-size (large-desktop) {
-        bottom: 0;
-        color: $white;
-        font-size: 40px;
-        margin-left: 100px;
-        position: absolute;
-        transform: translateY(-450%);
-      }
+    @include for-size (desktop) {
+      font-size: 2.7rem;
+      line-height: 4.5rem;
+      transform: translateY(-420px);
+      width: 60vw;
     }
   }
 
-  &__title {
-    @include for-size (tablet-portrait-up) {
-      font-size: 32px;
-      margin-left: 10px;
-      margin-top: 30px;
-    }
-    font-size: 25px;
-    font-weight: bolder;
-    position: relative;
+  &__button {
+    background-color: $button-color;
+    bottom: 0;
+    color: $black;
+    font-size: 1.5rem;
+    height: 28px;
+    margin: 2vh 7vw 0;
+    position: absolute;
+    transform: translateY(-420px);
+    transition: all .3s linear;
+    width: 30vw;
 
-    &::after {
-      @include for-size (tablet-portrait-up) {
-        width: 115rem;
+    &:hover {
+      background-color: transparent;
+      border: 1px $button-color solid;
+      color: $white;
+      cursor: pointer;
+      transition: all .3s linear;
+    }
+
+    &:active {
+      background-color: transparent;
+      border: 1px $button-color solid;
+      color: $white;
+    }
+  }
+
+  &__title-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    @include for-size (desktop) {
+      margin-top: 6vh;
+    }
+
+    .title {
+      font-family: 'Jura-Bold';
+      font-size: 2rem;
+      position: relative;
+
+      @include for-size (desktop) {
+        font-size: 2.3rem;
       }
-      background-color: $third-color;
-      content: '';
-      height: 1px;
-      position: absolute;
-      right: 0;
-      top: 60%;
-      width: 155px;
+    }
+
+    .line-decoration {
+      border-top: 1px solid $third-color;
+      width: 50%;
+
+      @include for-size (desktop) {
+        width: 80%;
+      }
     }
   }
 }

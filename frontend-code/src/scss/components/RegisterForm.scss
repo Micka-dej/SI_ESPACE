@@ -27,11 +27,24 @@
   }
 
   &__button {
-    background-color: $secondary-color;
-    border-radius: 60px;
+    background-color: $primary-color;
     color: $white;
     font-size: 1.3rem;
     height: 28px;
     width: 40%;
+
+    &:hover {
+      background-color: $white;
+      border: 1px $primary-color solid;
+      color: $primary-color;
+      cursor: pointer;
+      transition: all .3s linear;
+    }
+
+    &:active {
+      background-color: $white;
+      border: 1px $primary-color solid;
+      color: $primary-color;
+    }
   }
 }

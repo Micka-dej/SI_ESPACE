@@ -1,15 +1,13 @@
 <template>
-  <div class="Header-container">
-    <router-link :to="{name: 'Home'}" class="logo">
-      <img class="logo__image" :src="logoImage" alt="">
-    </router-link>
-    
-    <router-link :to="{name:'Register'}" class="register">
-      <h4 class="register__title">S'inscrire</h4>
-    </router-link>
-    <router-link :to="{name:'Login'}" class="login">
-      <h4 class="login__title">Se connecter</h4>
-    </router-link>
+  <div class="header">
+    <div class="header__container">
+      <router-link :to="{name: 'Home'}" class="logo">
+        <img class="logo__image" :src="logoImage" alt="">
+      </router-link>
+      <router-link :to="{name:'Dashboard'}" class="personal-space">
+        <p class="personal-space__link">Mon espace</p>
+      </router-link>
+    </div>
   </div>
 </template>
 

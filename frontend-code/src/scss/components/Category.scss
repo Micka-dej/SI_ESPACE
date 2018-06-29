@@ -3,25 +3,27 @@
 .category-container {
   width: 100vw;
 
+  &:last-child {
+    margin-bottom: 5vh;
+  }
 
   &__title  {
     color: $black;
-    font-family: 'Jura-Bold';
-    font-size: 16px;
+    font-family: 'Jura-Regular';
+    font-size: 1.5rem;
     margin-left: 6rem;
   }
 
   &__image {
-    @include for-size (tablet-portrait-up) {
+    @include for-size (desktop) {
       height: 80px;
     }
     height: 60px;
     width: 120px;
   }
 
-
   &__link {
-    @include for-size (tablet-portrait-up) {
+    @include for-size (desktop) {
       margin-top: 80px;
     }
     align-items: center;
@@ -32,7 +34,7 @@
     text-decoration: none;
 
     &:hover {
-      border: $primary-color 1px solid;
+      box-shadow: 0 0 7px 3px $box-dark-color;
     }
   }
 }

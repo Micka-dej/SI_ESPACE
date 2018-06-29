@@ -52,8 +52,7 @@
     }
 
     &__button {
-      background-color: $secondary-color;
-      border-radius: 60px;
+      background-color: $primary-color;
       color: $white;
       display: block;
       font-size: 1.2rem;
@@ -64,15 +63,16 @@
 
       &:hover {
         background-color: $white;
-        border: 1px $secondary-color solid;
-        color: $secondary-color;
+        border: 1px $primary-color solid;
+        color: $primary-color;
+        cursor: pointer;
         transition: all .3s linear;
       }
 
       &:active {
         background-color: $white;
-        border: 1px $secondary-color solid;
-        color: $secondary-color;
+        border: 1px $primary-color solid;
+        color: $primary-color;
       }
     }
   }
@@ -84,6 +84,7 @@
 
     &:hover {
       color: $secondary-color;
+      cursor: pointer;
       transition: color .3s linear;
     }
 

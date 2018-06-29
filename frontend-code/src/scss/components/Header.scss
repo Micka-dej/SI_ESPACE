@@ -1,75 +1,52 @@
 @import '../global/master';
 
-.Header-container {
-
-  @include for-size (tablet-portrait-up) {
-    height: 7vh;
-    padding: 15px 103px;
-  }
-  align-items: center;
+.header {
   background: $box-color;
-  display: flex;
-  height: 5vh;
+  height: 7vh;
   position: fixed;
   width: 100vw;
+  @include for-size (desktop) {
+    height: 9vh;
+  }
 
-  .logo {
-    padding: 10px 15px;
+  &__container {
+    align-items: center;
+    display: flex;
+    height: 5vh;
+    justify-content: space-between;
+    margin: 1vh auto;
+    width: 90vw;
+    @include for-size (desktop) {
+      margin: 2vh auto 1vh;
+      width: 95vw;
+    }
 
-    &__image {
-      @include for-size (tablet-portrait-up) {
-        height: 50px;
-        width: 50px;
-      }
-      height: 30px;
+    .logo {
       width: 30px;
-    }
-  }
-
-
-
-  .register {
-    @include for-size (tablet-portrait-up) {
-      transform: translateX(75rem);
-    }
-    margin-left: 150px;
-    text-decoration: none;
-
-    &__title {
-      @include for-size (tablet-portrait-up) {
-        font-size: 20px;
+      @include for-size (desktop) {
+        width: 42px;
       }
-      color: $white;
-      font-size: 12px;
 
-
-      &:hover {
-        border-bottom: $white 1px solid;
-        transition: 250ms;
+      &__image {
+        width: 100%;
       }
     }
-  }
 
+    .personal-space {
+      text-align: right;
+      text-decoration-line: none;
 
-  .login {
-    @include for-size (tablet-portrait-up) {
-      transform: translateX(80rem);
-    }
-    margin-left: 20px;
-    text-decoration: none;
+      &__link {
+        color: $white;
+        font-size: 1.3rem;
+        @include for-size (desktop) {
+          font-size: 1.4rem;
+        }
 
-
-    &__title {
-      @include for-size (tablet-portrait-up) {
-        font-size: 20px;
-      }
-      color: $white;
-      font-size: 12px;
-
-
-      &:hover {
-        border-bottom: $white 1px solid;
-        transition: 250ms;
+        &:hover {
+          border-bottom: 1px solid $white;
+          cursor: pointer;
+        }
       }
     }
   }

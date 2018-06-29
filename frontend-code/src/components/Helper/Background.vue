@@ -12,7 +12,7 @@
 <script>
 import router from "../../router/index.js";
 
-import defaultImage from "../../img/futurist_city.png";
+import defaultImage from "../../img/boutique.jpg";
 
 import "@ComponentStyle/HelperBackground.scss";
 

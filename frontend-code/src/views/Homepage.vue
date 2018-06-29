@@ -2,13 +2,15 @@
     <div class="home">
         <Header />
         <HelperBackground :imgSrc="bgImg"/>
-        <div class="container">
-          <h1 class="container__title">Bienvenue, sur Alpha. La station spaciale la plus unique de la galaxie. </h1>
-        </div>
+        <h1 class="home__description">Venez vivre l'expérience Alpha, la station spaciale qui révolutionne les voyages intergalactiques.</h1>
+        <button class="home__button" v-on:click="redirectToLogin">Réserver</button>
         <grid>
           <row start="xs">
             <column :xs="12">
-            <h2 class="home__title">Explorer Alpha</h2> 
+            <div class="home__title-container">
+              <h2 class="title">Explorer Alpha</h2> 
+              <div class="line-decoration"></div>
+            </div>
             </column>
             <Category v-for="service in services" :item="service" v-bind:key="service.title" />
           </row>
@@ -66,6 +68,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    redirectToLogin() {
+      router.push("/login");
+    }
   }
 };
 </script>

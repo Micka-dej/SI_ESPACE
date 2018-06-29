@@ -8,13 +8,13 @@
   width: 70%;
 
   &__item {
-    border: 1px $secondary-color solid;
+    border: 1px $primary-color solid;
     border-radius: 50%;
     height: 10px;
     width: 10px;
   }
 
   &__is-done {
-    background: $secondary-color;
+    background: $primary-color;
   }
 }
