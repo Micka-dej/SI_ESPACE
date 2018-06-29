@@ -46,18 +46,6 @@ class SpaceShip
     private $fuelType;
 
     /**
-     * Spaceship size.
-     *
-     * @ORM\Column(type="string", length=30)
-     *
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="30", maxMessage="Spaceship size must not exceed {{ limit }} characters.")
-     */
-    private $size;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="spaceship")
      */
     private $orders;
@@ -67,6 +55,9 @@ class SpaceShip
      */
     private $relatedUser;
 
+    /**
+     * SpaceShip constructor.
+     */
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -131,30 +122,6 @@ class SpaceShip
     }
 
     /**
-     * Size getter.
-     *
-     * @return null|string
-     */
-    public function getSize(): ?string
-    {
-        return $this->size;
-    }
-
-    /**
-     * Size setter.
-     *
-     * @param string $size
-     *
-     * @return SpaceShip
-     */
-    public function setSize(string $size): self
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Order[]
      */
     public function getOrders(): Collection
@@ -162,6 +129,11 @@ class SpaceShip
         return $this->orders;
     }
 
+    /**
+     * @param Order $order
+     *
+     * @return SpaceShip
+     */
     public function addOrder(Order $order): self
     {
         if (!$this->orders->contains($order)) {
@@ -172,6 +144,11 @@ class SpaceShip
         return $this;
     }
 
+    /**
+     * @param Order $order
+     *
+     * @return SpaceShip
+     */
     public function removeOrder(Order $order): self
     {
         if ($this->orders->contains($order)) {
@@ -185,11 +162,19 @@ class SpaceShip
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getRelatedUser(): ?User
     {
         return $this->relatedUser;
     }
 
+    /**
+     * @param User|null $relatedUser
+     *
+     * @return SpaceShip
+     */
     public function setRelatedUser(?User $relatedUser): self
     {
         $this->relatedUser = $relatedUser;

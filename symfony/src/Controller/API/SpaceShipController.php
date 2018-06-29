@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Class SpaceShipController.
@@ -36,13 +37,17 @@ class SpaceShipController extends Controller
      *
      * @return JsonResponse
      */
-    public function list(Request $request, APIService $APIService): JsonResponse
+    public function list(Request $request, APIService $APIService, SpaceShipService $spaceShipService): JsonResponse
     {
+        $user = $this->getUser();
+        if (null === $user) {
+            throw new AccessDeniedException();
+        }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(SpaceShip::class);
-        $spaceshipsList = $repo->findAll();
+        $spaceshipsList = $repo->findByRelatedUser($user);
 
-        return $APIService->successWithResults(['users' => $spaceshipsList], Response::HTTP_OK, self::LIST_RESULTS_FOR_IDENTIFIER, $request);
+        return $APIService->successWithResults(['spaceships' => $spaceshipsList], Response::HTTP_OK, self::LIST_RESULTS_FOR_IDENTIFIER, $request, $spaceShipService->generateSerializer());
     }
 
     /**
@@ -115,8 +120,12 @@ class SpaceShipController extends Controller
         if (self::ACCEPTED_CONTENT_TYPE !== $request->headers->get('content_type')) {
             throw $APIService->error(Response::HTTP_BAD_REQUEST, APIError::INVALID_CONTENT_TYPE);
         }
+        $user = $this->getUser();
+        if (null === $user) {
+            throw new AccessDeniedException();
+        }
         $data = $request->getContent();
-        $spaceShip = $spaceShipService->generateSpaceShipFromJSON($data);
+        $spaceShip = $spaceShipService->generateSpaceShipFromJSON($data, $user);
         $APIService->validateEntity($spaceShip);
         $em = $this->getDoctrine()->getManager();
         $em->persist($spaceShip);

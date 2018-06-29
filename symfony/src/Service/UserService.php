@@ -51,6 +51,10 @@ class UserService
         } else {
             $objectNormalizer->setIgnoredAttributes(['password', 'salt', 'plainPassword']);
         }
+        $objectNormalizer->setCircularReferenceLimit(1);
+        $objectNormalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
         $normalizers = [new DateTimeNormalizer('d-m-Y H:i:s', new \DateTimeZone('Europe/Paris')), $objectNormalizer];
 
         return new Serializer($normalizers, $encoders);
