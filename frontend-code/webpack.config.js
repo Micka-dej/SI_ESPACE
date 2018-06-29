@@ -43,7 +43,7 @@ const config = {
           {
             loader: "url-loader",
             options: {
-              limit: 0, // Convert images < 8kb to base64 strings
+              limit: 1, // Convert images < 8kb to base64 strings
               name: "images/[hash]-[name].[ext]"
             }
           }
